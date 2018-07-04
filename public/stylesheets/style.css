@@ -1,0 +1,225 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
+}
+
+.clickable {
+  min-height: 100vh;
+  min-width: 100vw;
+  z-index: 100;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position:fixed;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.bgImg {
+  background: url("/images/bg.jpg");
+  /* background-color: #aaeaf9; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  background-attachment: scroll;
+  background-position: 50% 50%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  z-index: 0;
+}
+
+.logo {
+  content: url("/images/logo.png");
+  position: fixed;
+  width: 60%;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@font-face {
+  font-family: Paragon;
+  src: url("/fonts/Paragon_Medium.ttf");
+}
+
+p.frontPage {
+  font-family: Paragon;
+  font-size: 30px;
+  position: fixed;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+p > span {
+  color: #c73534;
+}
+
+
+.greybg {
+  background: url("/images/bgtheme.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  background-attachment: scroll;
+  background-position: 50% 50%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  z-index: 0;
+
+}
+
+.topbar {
+  background-color: #c73534;
+  min-width: 100vw;
+  height: 10%;
+  top: 0;
+  position: fixed;
+}
+
+.route053 {
+  font-family: Paragon;
+  font-size: 60px;
+  color: white;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 5.5%;
+  left: 50%;
+
+  /* z-index: 5; */
+}
+
+.backbutton {
+  /* content: url("/images/back.png"); */
+  position: fixed;
+  width: 50px;
+  height: auto;
+  top: 2%;
+  left: 1%;
+}
+
+
+.map {
+  position: fixed;
+  width: 50%;
+  height: 75%;
+  left: 5%;
+  top: 18%;
+  /* bottom: 10%; */
+}
+
+.qrcodet {
+  /* content: url("/images/poolroute.png"); */
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  top: 18%;
+  left: 60%;
+}
+
+.qrcode {
+  content: url("/images/qrcodes/poolbridge.png");
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  top: 18%;
+  left: 60%;
+}
+
+.textundercode {
+  /* background-color: white; */
+  position: fixed;
+  width: 350px;
+  height: 270px;
+  top: 63%;
+  left: 60%;
+}
+
+.qrtext {
+  font-family: Paragon;
+  font-size: 30px;
+  position: relative;
+  top: 15%;
+  left: 7%;
+}
+
+.card-deck-wrapper {
+  position: fixed;
+  top: 35%;  
+  left: 5%;
+}
+
+.card-deck-wrapper1 {
+  position: fixed;
+  top: 35%;  
+  left: 22%;
+}
+
+/* .card {
+  min-width: 290px;
+} */
+
+.card-body {
+  min-width: 290px;
+  max-width: 291px;
+  color: #ffffff;
+  background-color: #c73534;
+  font-family: Roboto;
+}
+
+.img-padding {
+  max-width: 200px;
+  position: relative;
+  left: 18%;
+  /* transform: translate(-50%, -50%); */
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  /* padding-left: 15px; */
+}
+
+.form-check-label {
+  font-size: 20px;
+}
+
+#checkbox101, #checkbox102, #checkbox103 {
+  top: 20%;
+}
+
+.btn {
+  /*style button*/
+  position: fixed;
+  top: 85%;
+  left: 48%;
+}
+
+
+/* .bg-light {
+  color: #c73534;
+} */
+
+/* .checkbox-red [type="checkbox"]:checked+label:before {
+  border-color: transparent #dc3545 #dc3545 transparent;
+} */
+
+/* a {
+  color: #00B7FF;
+} */
+
+
+/* fieldset {
+	border:0;
+	padding:0; margin:0;
+} */

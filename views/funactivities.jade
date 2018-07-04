@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    div(class="bgImg")
+        div(class="topbar")
+            p(class="route053") Route 053
+            input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    .card-deck-wrapper
+        .card-deck
+            // Card 1
+            .card.text-center(onclick="pool()")
+                img.card-img-top.img-padding(src='/images/poolen.png', alt='Pool')
+                .card-body
+                    h5 Poolen
+                    //- p.card-text Alles van poolen tot musea en veel meer
+            // Card 2
+            .card.text-center(onclick="film()")
+                img.card-img-top.img-padding(src='/images/cinema.png', alt='Film')
+                .card-body
+                    h5 Film
+                    //- p.card-text Jij kiest de winkels en wij maken de route
+            // Card 3
+            .card.text-center(onclick="escapeRoom()")
+                img.card-img-top.img-padding(src='/images/escaperoom.png', alt='Escape Room')
+                .card-body
+                    h5 Escape Room
+                    //- p.card-text Restaurants, Cafes, Terrasjes, Bars

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    div(class="bgImg")
+        div(class="topbar")
+            p(class="route053") Route 053
+            input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    .card-deck-wrapper1
+        .card-deck
+            // Card 1
+            .card.text-center(onclick="funActivities()")
+                img.card-img-top.img-padding(src='/images/fun_activities.png', alt='Fun activities')
+                .card-body
+                    h5 Fun activities
+                    //- p.card-text Alles van poolen tot musea en veel meer
+            // Card 2
+            .card.text-center(onclick="culture()")
+                img.card-img-top.img-padding(src='/images/culture_route.png', alt='Culture route')
+                .card-body
+                    h5 Culture route
+                    //- p.card-text Jij kiest de winkels en wij maken de route

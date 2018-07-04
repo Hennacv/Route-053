@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    div(class="bgImg")
+        div(class="topbar")
+            p(class="route053") Escape Room
+            input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+        div.map(id="maperoom")
+        img(class="qrcodet" src="/images/qr-codes/escaperoom.png")
+        div(class="textundercode")
+            p(class="qrtext") 1. Ga naar #[span Route053.com] #[br]
+            p(class="qrtext") 2. Scan de #[span QR Code] #[br]
+            p(class="qrtext") 3. #[span Veel plezier] met uw route
+    script(src='/javascripts/premadeeroom.js')
