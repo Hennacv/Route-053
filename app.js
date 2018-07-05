@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var router = express.Router();
+var db = require('./initializesdk.js');
 
 var indexRouter = require('./routes/index');
 var firstChRouter = require('./routes/firstCh');
@@ -68,6 +70,24 @@ app.use('/muschgal', muschgalRouter);
 app.use('/musch', muschRouter);
 app.use('/musgal', musgalRouter);
 app.use('/chgal', chgalRouter);
+
+router.route("/api/mastersheet").get(function(req, res) {
+  var locations = [];
+
+  db.ref("masterSheet").once('value').then(function(snapshot){
+
+    var allItems = snapshot.val();
+    for(let i = 1; i < allItems.length; i++){
+        var placeId = allItems[i][4];
+        var name = allItems[i][1];
+        locations.push({ name: name, placeId: placeId });
+    }
+    console.log("locs:", locations);
+    res.send(locations);
+    })
+})
+
+app.use("/", router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,19 +1,5 @@
 $(document).ready(displayPage);
 
-var db = require('../initializesdk.js');
-var locations = [];
-
-db.ref("masterSheet").once('value').then(function(snapshot){
-  var allItems = snapshot.val();
-  for(let i = 0; i < allItems.length; i++){
-    var placeId = allItems[i][4];
-    var name = allItems[i][1];
-    locations.push({ name: name, placeId: placeId });
-  }
-  console.log('locations:', locations);
-
-})
-
 function displayPage(){
     // $(".clickable").click(nextPage);
     var clicky = document.querySelector(".clickable");
@@ -44,20 +30,20 @@ function culture(){
     window.location.href = "./culture";
 }
 
-function museum(){
-    // console.log("museum clicked");
-    // window.location.href = "./museum";
-}
+// function museum(){
+//     // console.log("museum clicked");
+//     // window.location.href = "./museum";
+// }
 
-function church(){
-    // console.log("church clicked");
-    // window.location.href = "./church";
-}
+// function church(){
+//     // console.log("church clicked");
+//     // window.location.href = "./church";
+// }
 
-function galleries(){
-    // console.log("gallery clicked");
-    // window.location.href = "./gal";
-}
+// function galleries(){
+//     // console.log("gallery clicked");
+//     // window.location.href = "./gal";
+// }
 
 function pool(){
     console.log("clicked");
@@ -123,14 +109,3 @@ function restaurant(){
     console.log("clicked");
     window.location.href = "./restaurant";
 }
-
-
-// function chosenCulture( e ) {
-//     var checkboxes = document.getElementsByClassName('culturecheck');
-
-//     for (var i=0; i<checkboxes.length; i++)  {
-//         if (checkboxes[i].checked == true)   {
-//           console.log("CHECKED");
-//         }
-//       }
-// }
