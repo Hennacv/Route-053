@@ -149,7 +149,7 @@ function determineSpecificRoute(category){
 }
 
 function determineMultipleRoute(category){
-    if(category) window.location.href = `./multiple/${category}`;
+    if(category) window.location.href = `./route/${category}`;
     console.log("finding cat2:", category);
 }
 
@@ -158,7 +158,7 @@ function fetchSpecificStores(janky){
     console.log("poops:", janky);
 }
 
-function dothing(category){
+function dospecific(category){
     console.log("triggered *autistic spaz*")
     $.ajax({
         method: "GET",
@@ -172,6 +172,23 @@ function dothing(category){
         }).done(function(data){
             // console.log(data); // --> make cards, ho
             createCardsSpecific(data);
+        })
+}
+
+function doroute(category){
+    console.log("triggered route *autistic spaz*")
+    $.ajax({
+        method: "GET",
+        data: {filter: category},
+        url: "/api/route-mastersheet",
+        dataType: "json",
+        }).fail(function(err){
+            console.error("Filter Route Sheet call failed.", err)
+        }).always(function(){
+            console.info("Processing filter route call.")
+        }).done(function(data){
+            console.log("route works"); // --> make cards, ho
+            // createCardsSpecific(data);
         })
 }
 

@@ -22,7 +22,9 @@ var galRouter = require('./routes/gal');
 var shopRouter = require('./routes/shop');
 var foodRouter = require('./routes/food');
 var specificRouter = require('./routes/specific');
+var specificList = require('./routes/specificList');
 var routeRouter = require('./routes/route');
+var routeList = require('./routes/routeList');
 var allstoresRouter = require('./routes/allstores');
 var terrasRouter = require('./routes/terras');
 var cafeRouter = require('./routes/cafe');
@@ -31,7 +33,7 @@ var muschgalRouter = require('./routes/muschgal');
 var muschRouter = require('./routes/musch');
 var musgalRouter = require('./routes/musgal');
 var chgalRouter = require('./routes/chgal');
-var specificList = require('./routes/specificList')
+
 
 var app = express();
 
@@ -74,6 +76,9 @@ app.use('/chgal', chgalRouter);
 app.get('/specific/:category', function(req, res, next){
   res.render('specificList', { title: 'Route 053', category: req.params.category });
 });
+app.get('/route/:category', function(req, res, next){
+  res.render('routeList', { title: 'Route 053', category: req.params.category });
+});
 
 router.route("/api/mastersheet").get(function(req, res) {
   var locations = [];
@@ -97,7 +102,54 @@ router.route("/api/mastersheet").get(function(req, res) {
     })
 })
 
+router.route("/api/mastersheet").get(function(req, res) {
+  var locations = [];
+
+  db.ref("masterSheet").once('value').then(function(snapshot){
+
+    var allItems = snapshot.val();
+    for(let i = 1; i < allItems.length; i++){
+        var name = allItems[i][1];
+        var category = allItems[i][2];
+        var subcategory = allItems[i][3];
+        var placeId = allItems[i][4];
+        var zone = allItems[i][6];
+        var latitude = allItems[i][7];
+        var longitude = allItems[i][8];
+
+        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
+    }
+    // console.log("locs:", locations);
+    res.send(locations);
+    })
+})
+
 router.route("/api/specific-mastersheet").get(function(req, res) {
+  var filter = req.query.filter;
+  var locations = [];
+
+  db.ref("masterSheet").once('value').then(function(snapshot){
+
+    var allItems = snapshot.val();
+    for(let i = 1; i < allItems.length; i++){
+      if(filter === allItems[i][2]){
+        var name = allItems[i][1];
+        var category = allItems[i][2];
+        var subcategory = allItems[i][3];
+        var placeId = allItems[i][4];
+        var zone = allItems[i][6];
+        var latitude = allItems[i][7];
+        var longitude = allItems[i][8];
+
+        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
+      }
+    }
+    console.log("locs:", locations);
+    res.send(locations);
+    })
+})
+
+router.route("/api/route-mastersheet").get(function(req, res) {
   var filter = req.query.filter;
   var locations = [];
 
