@@ -102,25 +102,25 @@ router.route("/api/mastersheet").get(function(req, res) {
     })
 })
 
-router.route("/api/mastersheet").get(function(req, res) {
-  var locations = [];
+router.route("/api/restsheet").get(function(req, res) {
+  var restaurants = [];
 
-  db.ref("masterSheet").once('value').then(function(snapshot){
+  db.ref("restSheet").once('value').then(function(snapshot){
 
     var allItems = snapshot.val();
     for(let i = 1; i < allItems.length; i++){
-        var name = allItems[i][1];
+        var name = allItems[i][0];
         var category = allItems[i][2];
-        var subcategory = allItems[i][3];
-        var placeId = allItems[i][4];
-        var zone = allItems[i][6];
-        var latitude = allItems[i][7];
-        var longitude = allItems[i][8];
+        var subcategory = allItems[i][4];
+        var placeId = allItems[i][1];
+        var price = allItems[i][3];
+        var latitude = allItems[i][5];
+        var longitude = allItems[i][6];
 
-        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
+        restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
     }
-    // console.log("locs:", locations);
-    res.send(locations);
+    console.log("locs:", restaurants);
+    res.send(restaurants);
     })
 })
 
