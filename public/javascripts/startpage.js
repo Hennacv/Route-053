@@ -1,5 +1,7 @@
 $(document).ready(displayPage);
 
+var list;
+
 function displayPage(){
     // $(".clickable").click(nextPage);
     var clicky = document.querySelector(".clickable");
@@ -29,21 +31,6 @@ function culture(){
     console.log("clicked");
     window.location.href = "./culture";
 }
-
-// function museum(){
-//     // console.log("museum clicked");
-//     // window.location.href = "./museum";
-// }
-
-// function church(){
-//     // console.log("church clicked");
-//     // window.location.href = "./church";
-// }
-
-// function galleries(){
-//     // console.log("gallery clicked");
-//     // window.location.href = "./gal";
-// }
 
 function pool(){
     console.log("clicked");
@@ -80,9 +67,10 @@ function eatFood(){
     window.location.href = "./food";
 }
 
-function somethingSpecific(){
+function somethingSpecific(locations){
     console.log("clicked");
     window.location.href = "./specific";
+    // retrieveStores();
 }
 
 function goToRoute(){
@@ -108,4 +96,75 @@ function cafe(){
 function restaurant(){
     console.log("clicked");
     window.location.href = "./restaurant";
+}
+
+function retrieveStores(){
+    $.ajax({
+        method: "GET",
+        url: "/api/mastersheet",
+        dataType: "json",
+    }).fail(function(err){
+        console.error("Mastersheet call failed.", err)
+    }).always(function(){
+        console.info("Processing mastersheet call.")
+    }).done(function(data){
+        createButtons(data);
+    })
+}
+
+function showList(locations){
+    for (var i = 0; i < locations.length; i++) {
+        list = "<li>" + locations[i].categories + "</li>";
+        $(".displaylist").append(list);
+        // list = "";
+    }
+}
+
+
+function createButtons( locations ){
+
+    // console.log("loaded")
+    // for (var i = 0; i < locations.length; i++) {
+    //     var categories = locations[i].category;
+
+    //     for (var i = 0; i < categories.length; i++) {
+    //         var buttons = $( '<button>' + categories[i] + '</button>');
+    //         buttons.appendTo('buttongroup');
+    //         console.log( categories );
+    //     }
+        
+
+        // for (var i = 0; i < categories.length; i++) {
+            
+        //     $('.buttongroup').append( button );
+            
+        // }
+        
+    
+}
+
+function determineSpecificRoute(category){
+    if(category) window.location.href = `./specific/${category}`;
+    console.log("finding cat:", category);
+}
+
+function fetchSpecificStores(janky){
+    console.log("fuck me");
+    console.log("poops:", janky);
+}
+
+function dothing(category){
+    console.log("triggered *autistic spaz*")
+    $.ajax({
+        method: "GET",
+        data: {filter: category},
+        url: "/api/specific-mastersheet",
+        dataType: "json",
+        }).fail(function(err){
+            console.error("Filter Sheet call failed.", err)
+        }).always(function(){
+            console.info("Processing filter call.")
+        }).done(function(data){
+            console.log(data); // --> make cards, ho
+        })
 }

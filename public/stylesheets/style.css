@@ -167,6 +167,12 @@ p > span {
   left: 22%;
 }
 
+.card-deck-wrapperS {
+  position: fixed;
+  top: 35%;  
+  left: 15%;
+}
+
 /* .card {
   min-width: 290px;
 } */
@@ -178,6 +184,7 @@ p > span {
   background-color: #c73534;
   font-family: Roboto;
 }
+
 
 .img-padding {
   max-width: 200px;
@@ -198,13 +205,53 @@ p > span {
   top: 20%;
 }
 
-.btn {
+/* .btn {
   /*style button*/
-  position: fixed;
+ /* position: fixed;
   top: 85%;
   left: 48%;
+} */
+
+.bgroup {
+  position: fixed;
+  top: 10%;  
+  left: 50%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
 }
 
+.btn {
+  /* bootstrap was rewriting flex to inline-block */
+  display: flex !important; 
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-height: 13vh;
+  background: white;
+  
+}
+
+.list {
+  position: fixed;
+  border: #c73534;
+  width: 100vw;
+  height: 80vh;
+  top: 10%;
+}
+
+.makemegopoof {
+  opacity: 0;
+}
+
+.myownbitchassbutton {
+  padding: 10px;
+  width: 50px;
+  height: 30px;
+  display: block;
+  margin-top: 300px;
+  background-color: white;
+}
 
 /* .bg-light {
   color: #c73534;
