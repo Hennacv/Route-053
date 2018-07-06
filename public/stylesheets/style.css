@@ -173,6 +173,23 @@ p > span {
   left: 15%;
 }
 
+.card-deck-wrapperM {
+  max-width: 98vw;
+  position: fixed;
+  top: 20%;  
+  left: 10%;
+  right: 10%;
+  border: #c73534;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* .specificcard {
+  min-width: 35px;
+} */
+
 /* .card {
   min-width: 290px;
 } */
@@ -219,6 +236,7 @@ p > span {
   width: 40%;
   display: flex;
   flex-direction: column;
+
 }
 
 .btn {
@@ -228,17 +246,16 @@ p > span {
   justify-content: center;
   width: auto;
   min-height: 13vh;
-  background: white;
-  
+  background-color: #F5F5F5;  
 }
 
-.list {
+/* .list {
   position: fixed;
   border: #c73534;
   width: 100vw;
   height: 80vh;
   top: 10%;
-}
+} */
 
 .makemegopoof {
   opacity: 0;

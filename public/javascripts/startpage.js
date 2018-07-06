@@ -112,13 +112,13 @@ function retrieveStores(){
     })
 }
 
-function showList(locations){
-    for (var i = 0; i < locations.length; i++) {
-        list = "<li>" + locations[i].categories + "</li>";
-        $(".displaylist").append(list);
-        // list = "";
-    }
-}
+// function showList(locations){
+//     for (var i = 0; i < locations.length; i++) {
+//         list = "<li>" + locations[i].categories + "</li>";
+//         $(".displaylist").append(list);
+//         // list = "";
+//     }
+// }
 
 
 function createButtons( locations ){
@@ -148,6 +148,11 @@ function determineSpecificRoute(category){
     console.log("finding cat:", category);
 }
 
+function determineMultipleRoute(category){
+    if(category) window.location.href = `./multiple/${category}`;
+    console.log("finding cat2:", category);
+}
+
 function fetchSpecificStores(janky){
     console.log("fuck me");
     console.log("poops:", janky);
@@ -165,6 +170,26 @@ function dothing(category){
         }).always(function(){
             console.info("Processing filter call.")
         }).done(function(data){
-            console.log(data); // --> make cards, ho
+            // console.log(data); // --> make cards, ho
+            createCardsSpecific(data);
         })
+}
+
+function createCardsSpecific( category ) {
+    console.log("yes bitch") 
+    for (var i = 0; i < category.length; i++) {
+        var name = category[i].name;
+        var card =  $(`<div class="card text-center" onclick="film()">
+                            <img class="card-img-top img-padding" src="/images/cinema.png" alt="Film"/>
+                            <div class="card-body">
+                                <h5>`+ category[i].name +`</h5>
+                            </div>
+                        </div>) `)
+        $(".specificcard").append(card)
+
+        // card.click(cardclicked);
+
+
+        
+    }
 }
