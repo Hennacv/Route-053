@@ -119,7 +119,7 @@ router.route("/api/restsheet").get(function(req, res) {
 
         restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
     }
-    console.log("locs:", restaurants);
+    console.log("rests:", restaurants);
     res.send(restaurants);
     })
 })

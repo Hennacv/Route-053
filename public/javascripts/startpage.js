@@ -3,7 +3,6 @@ $(document).ready(displayPage);
 var list;
 
 function displayPage(){
-    // $(".clickable").click(nextPage);
     var clicky = document.querySelector(".clickable");
     clicky.addEventListener("click", nextPage);
 }
@@ -112,37 +111,6 @@ function retrieveStores(){
     })
 }
 
-// function showList(locations){
-//     for (var i = 0; i < locations.length; i++) {
-//         list = "<li>" + locations[i].categories + "</li>";
-//         $(".displaylist").append(list);
-//         // list = "";
-//     }
-// }
-
-
-function createButtons( locations ){
-
-    // console.log("loaded")
-    // for (var i = 0; i < locations.length; i++) {
-    //     var categories = locations[i].category;
-
-    //     for (var i = 0; i < categories.length; i++) {
-    //         var buttons = $( '<button>' + categories[i] + '</button>');
-    //         buttons.appendTo('buttongroup');
-    //         console.log( categories );
-    //     }
-        
-
-        // for (var i = 0; i < categories.length; i++) {
-            
-        //     $('.buttongroup').append( button );
-            
-        // }
-        
-    
-}
-
 function determineSpecificRoute(category){
     if(category) window.location.href = `./specific/${category}`;
     console.log("finding cat:", category);
@@ -196,17 +164,21 @@ function createCardsSpecific( category ) {
     console.log("yes bitch") 
     for (var i = 0; i < category.length; i++) {
         var name = category[i].name;
-        var card =  $(`<div class="card text-center" onclick="film()">
+        var cardS =  $(`<div class="card text-center" onclick="film()">
                             <img class="card-img-top img-padding" src="/images/cinema.png" alt="Film"/>
                             <div class="card-body">
                                 <h5>`+ category[i].name +`</h5>
                             </div>
                         </div>) `)
-        $(".specificcard").append(card)
+        $(".specificcard").append(cardS)
 
-        // card.click(cardclicked);
+        cardS.click(cardSclicked);
 
 
         
     }
+}
+
+function cardSclicked(){
+    console.log("card clicked")
 }
