@@ -7,10 +7,16 @@ block content
         var category = document.getElementById('category').textContent;
         //- console.log("peop t");
         dofood(category);
+    //- div(class="bgImg")
+    //-     //- div.myownbitchassbutton(onclick=`dothing('${category}')`) click me whore
+    //-     div(class="topbar")
+    //-         p(class="route053") Choice of !{category}
+    //-         input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    //-     .card-columns-wrapperM
+    //-         .card-columns.specificcard
+    
     div(class="bgImg")
-        //- div.myownbitchassbutton(onclick=`dothing('${category}')`) click me whore
-        div(class="topbar")
-            p(class="route053") Choice of !{category}
-            input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
-        .card-columns-wrapperM
-            .card-columns.specificcard
+    .card-container.foodcard
+    div(class="topbar")
+        p(class="route053") Choice of !{category}
+        input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")

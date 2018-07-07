@@ -188,15 +188,22 @@ function changchang(location){
 
 function createCardsFood( category ) {
     for (var i = 0; i < category.length; i++) {
-        var name = category[i].name;
-        var cardF =  $(`<div class="card text-center" onclick="film()">
-                            <img class="card-img-top img-padding" src="/images/cinema.png" alt="Film"/>
-                            <div class="card-body">
-                                <h5>`+ name +`</h5>
-                            </div>
-                        </div>) `)
-        $(".specificcard").append(cardF)
+        var restaurant = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone,
+            location: { lat: category[i].latitude, lon: category[i].longitude } }
+        
+            console.log("rests:", restaurant);
 
-        cardF.click(cardSclicked);
+        var card = document.createElement('div');
+        card.classList = "card text-center";
+        card.innerHTML = `<img class="card-img-top img-padding" src="/images/cinema.png"/>
+                                <div class="card-body">
+                                    <h5>${restaurant.name}</h5>
+                                </div>
+                        </div>`;
+        card.addEventListener('click', function(){
+            var zone = getLetter(restaurant.zone);
+            console.log("zone:", zone);
+        })
+        $(".foodcard").append(card)
     }
 }
