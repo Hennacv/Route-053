@@ -82,21 +82,6 @@ function allStores(){
     window.location.href = "./allstores";
 }
 
-function terras(){
-    console.log("clicked");
-    window.location.href = "./terras";
-}
-
-function cafe(){
-    console.log("clicked");
-    window.location.href = "./cafe";
-}
-
-function restaurant(){
-    console.log("clicked");
-    window.location.href = "./restaurant";
-}
-
 function retrieveStores(){
     $.ajax({
         method: "GET",
@@ -119,6 +104,11 @@ function determineSpecificRoute(category){
 function determineMultipleRoute(category){
     if(category) window.location.href = `./route/${category}`;
     console.log("finding cat2:", category);
+}
+
+function determineFood(category){
+    if(category) window.location.href = `./food/${category}`;
+    console.log("finding food:", category);
 }
 
 function fetchSpecificStores(janky){
@@ -155,11 +145,27 @@ function doroute(category){
         }).always(function(){
             console.info("Processing filter route call.")
         }).done(function(data){
-            console.log("route works"); // --> make cards, ho
-            // createCardsSpecific(data);
+            console.log("route works"); 
+        
         })
 }
 
+function dofood(category){
+    console.log("food bitch")
+    $.ajax({
+        method: "GET",
+        data: {filter: category},
+        url: "/api/food-restsheet",
+        dataType: "json",
+        }).fail(function(err){
+            console.error("Filter food Sheet call failed.", err)
+        }).always(function(){
+            console.info("Processing food route call.")
+        }).done(function(data){
+            console.log("food works");
+            createCardsFood(data); 
+        })
+}
 function createCardsSpecific( category ) {
     console.log("yes bitch") 
     for (var i = 0; i < category.length; i++) {
@@ -167,18 +173,31 @@ function createCardsSpecific( category ) {
         var cardS =  $(`<div class="card text-center" onclick="film()">
                             <img class="card-img-top img-padding" src="/images/cinema.png" alt="Film"/>
                             <div class="card-body">
-                                <h5>`+ category[i].name +`</h5>
+                                <h5>`+ name +`</h5>
                             </div>
                         </div>) `)
         $(".specificcard").append(cardS)
 
-        cardS.click(cardSclicked);
-
-
-        
+        cardS.click(cardSclicked); 
     }
 }
 
 function cardSclicked(){
     console.log("card clicked")
+}
+
+function createCardsFood( category ) {
+    console.log("yes bitch") 
+    for (var i = 0; i < category.length; i++) {
+        var name = category[i].name;
+        var cardF =  $(`<div class="card text-center" onclick="film()">
+                            <img class="card-img-top img-padding" src="/images/cinema.png" alt="Film"/>
+                            <div class="card-body">
+                                <h5>`+ name +`</h5>
+                            </div>
+                        </div>) `)
+        $(".specificcard").append(cardF)
+
+        cardF.click(cardSclicked); 
+    }
 }

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Paragon;
+  src: url("/fonts/Paragon_Medium.ttf");
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -46,10 +51,6 @@ body {
   transform: translate(-50%, -50%);
 }
 
-@font-face {
-  font-family: Paragon;
-  src: url("/fonts/Paragon_Medium.ttf");
-}
 
 p.frontPage {
   font-family: Paragon;
@@ -173,26 +174,14 @@ p > span {
   left: 15%;
 }
 
-.card-deck-wrapperM {
+.card-columns-wrapperM {
   max-width: 98vw;
   position: fixed;
   top: 20%;  
   left: 10%;
-  right: 10%;
-  border: #c73534;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;  
+  right: 10%;  
 }
 
-/* .specificcard {
-  min-width: 35px;
-} */
-
-/* .card {
-  min-width: 290px;
-} */
 
 .card-body {
   min-width: 290px;
@@ -207,7 +196,6 @@ p > span {
   max-width: 200px;
   position: relative;
   left: 18%;
-  /* transform: translate(-50%, -50%); */
   padding-top: 15px;
   padding-bottom: 15px;
 
@@ -222,12 +210,7 @@ p > span {
   top: 20%;
 }
 
-/* .btn {
-  /*style button*/
- /* position: fixed;
-  top: 85%;
-  left: 48%;
-} */
+
 
 .bgroup {
   position: fixed;
@@ -249,14 +232,6 @@ p > span {
   background-color: #F5F5F5;  
 }
 
-/* .list {
-  position: fixed;
-  border: #c73534;
-  width: 100vw;
-  height: 80vh;
-  top: 10%;
-} */
-
 .makemegopoof {
   opacity: 0;
 }
@@ -270,20 +245,3 @@ p > span {
   background-color: white;
 }
 
-/* .bg-light {
-  color: #c73534;
-} */
-
-/* .checkbox-red [type="checkbox"]:checked+label:before {
-  border-color: transparent #dc3545 #dc3545 transparent;
-} */
-
-/* a {
-  color: #00B7FF;
-} */
-
-
-/* fieldset {
-	border:0;
-	padding:0; margin:0;
-} */

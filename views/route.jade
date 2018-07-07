@@ -3,16 +3,16 @@ extends layout
 block content
     div(class="bgImg")
         div(class="topbar")
-            p(class="route053") Something specific
+            p(class="route053") Route
             input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
-    .card-deck-wrapperS
-        .card-deck
-            // Card 1
-            .card.text-center(onclick="allStores()")
-                img.card-img-top(src='/images/', alt='Fun')
-                .card-body
-                    h5 What am I looking for
-                    //- p.card-text Alles van poolen tot musea en veel meer
+    //- .card-deck-wrapperS
+    //-     .card-deck
+    //-         // Card 1
+    //-         .card.text-center(onclick="allStores()")
+    //-             img.card-img-top(src='/images/', alt='Fun')
+    //-             .card-body
+    //-                 h5 What am I looking for
+    //-                 //- p.card-text Alles van poolen tot musea en veel meer
     div(class="bgroup" )
         .btn(onclick='determineMultipleRoute("Clothes")') Clothes
         .btn(onclick='determineMultipleRoute("Presents")') Presents

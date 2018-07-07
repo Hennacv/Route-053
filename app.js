@@ -21,14 +21,12 @@ var churchRouter = require('./routes/church');
 var galRouter = require('./routes/gal');
 var shopRouter = require('./routes/shop');
 var foodRouter = require('./routes/food');
+var specificList = require('./routes/foodChoice');
 var specificRouter = require('./routes/specific');
 var specificList = require('./routes/specificList');
 var routeRouter = require('./routes/route');
 var routeList = require('./routes/routeList');
 var allstoresRouter = require('./routes/allstores');
-var terrasRouter = require('./routes/terras');
-var cafeRouter = require('./routes/cafe');
-var restaurantRouter = require('./routes/restaurant');
 var muschgalRouter = require('./routes/muschgal');
 var muschRouter = require('./routes/musch');
 var musgalRouter = require('./routes/musgal');
@@ -66,9 +64,6 @@ app.use('/food', foodRouter);
 app.use('/specific', specificRouter);
 app.use('/route', routeRouter);
 app.use('/allstores', allstoresRouter);
-app.use('/terras', terrasRouter);
-app.use('/cafe', cafeRouter);
-app.use('/restaurant', restaurantRouter);
 app.use('/muschgal', muschgalRouter);
 app.use('/musch', muschRouter);
 app.use('/musgal', musgalRouter);
@@ -78,6 +73,9 @@ app.get('/specific/:category', function(req, res, next){
 });
 app.get('/route/:category', function(req, res, next){
   res.render('routeList', { title: 'Route 053', category: req.params.category });
+});
+app.get('/food/:category', function(req, res, next){
+  res.render('foodChoice', { title: 'Route 053', category: req.params.category });
 });
 
 router.route("/api/mastersheet").get(function(req, res) {
@@ -99,28 +97,6 @@ router.route("/api/mastersheet").get(function(req, res) {
     }
     console.log("locs:", locations);
     res.send(locations);
-    })
-})
-
-router.route("/api/restsheet").get(function(req, res) {
-  var restaurants = [];
-
-  db.ref("restSheet").once('value').then(function(snapshot){
-
-    var allItems = snapshot.val();
-    for(let i = 1; i < allItems.length; i++){
-        var name = allItems[i][0];
-        var category = allItems[i][2];
-        var subcategory = allItems[i][4];
-        var placeId = allItems[i][1];
-        var price = allItems[i][3];
-        var latitude = allItems[i][5];
-        var longitude = allItems[i][6];
-
-        restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
-    }
-    console.log("rests:", restaurants);
-    res.send(restaurants);
     })
 })
 
@@ -171,6 +147,53 @@ router.route("/api/route-mastersheet").get(function(req, res) {
     }
     console.log("locs:", locations);
     res.send(locations);
+    })
+})
+
+router.route("/api/restsheet").get(function(req, res) {
+  var restaurants = [];
+
+  db.ref("restSheet").once('value').then(function(snapshot){
+
+    var allItems = snapshot.val();
+    for(let i = 1; i < allItems.length; i++){
+        var name = allItems[i][0];
+        var category = allItems[i][2];
+        var subcategory = allItems[i][4];
+        var placeId = allItems[i][1];
+        var price = allItems[i][3];
+        var latitude = allItems[i][5];
+        var longitude = allItems[i][6];
+
+        restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
+    }
+    console.log("rests:", restaurants);
+    res.send(restaurants);
+    })
+})
+
+router.route("/api/food-restsheet").get(function(req, res) {
+  var filter = req.query.filter;
+  var restaurants = [];
+
+  db.ref("restSheet").once('value').then(function(snapshot){
+
+    var allItems = snapshot.val();
+    for(let i = 1; i < allItems.length; i++){
+      if(filter === allItems[i][2]){
+        var name = allItems[i][0];
+        var category = allItems[i][2];
+        var subcategory = allItems[i][4];
+        var placeId = allItems[i][1];
+        var price = allItems[i][3];
+        var latitude = allItems[i][5];
+        var longitude = allItems[i][6];
+
+        restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
+      }
+    }
+    console.log("rests:", restaurants);
+    res.send(restaurants);
     })
 })
 
