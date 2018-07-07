@@ -146,6 +146,7 @@ function doroute(category){
 }
 
 function dofood(category){
+    console.log("bitch please:", category)
     $.ajax({
         method: "GET",
         data: {filter: category},
