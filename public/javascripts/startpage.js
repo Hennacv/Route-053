@@ -1,5 +1,4 @@
 $(document).ready(displayPage);
-
 var list;
 
 function displayPage(){
@@ -165,7 +164,6 @@ function createCardsSpecific( category ) {
     for (var i = 0; i < category.length; i++) {
         var location = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone,
             location: { lat: category[i].latitude, lon: category[i].longitude } }
-        // var cardG = `<div class="card text-center">
 
         var card = document.createElement('div');
         card.classList = "card text-center";
@@ -175,21 +173,17 @@ function createCardsSpecific( category ) {
                                 </div>
                         </div>`;
         card.addEventListener('click', function(){
-            changchang(location);
+            var zone = getLetter(location.zone);
+            console.log("zone:", zone);
         })
-        console.log(card);
 
         $(".specificcard").append(card)
     }
 }
 
 function changchang(location){
-    console.log("plip")
-    console.log(location);
-}
-
-function cardSclicked(){
-    console.log("card clicked")
+    var zone = getLetter(location.zone);
+    console.log("zone:", zone);
 }
 
 function createCardsFood( category ) {
