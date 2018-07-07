@@ -180,16 +180,18 @@ router.route("/api/food-restsheet").get(function(req, res) {
 
     var allItems = snapshot.val();
     for(let i = 1; i < allItems.length; i++){
-      if(filter === allItems[i][2]){
-        var name = allItems[i][0];
-        var category = allItems[i][2];
-        var subcategory = allItems[i][4];
-        var placeId = allItems[i][1];
-        var price = allItems[i][3];
-        var latitude = allItems[i][5];
-        var longitude = allItems[i][6];
+      if(filter === true){
+        if(("Cafe" || "Terras") !== allItems[i][2]){
+          var name = allItems[i][0];
+          var category = allItems[i][2];
+          var subcategory = allItems[i][4];
+          var placeId = allItems[i][1];
+          var price = allItems[i][3];
+          var latitude = allItems[i][5];
+          var longitude = allItems[i][6];
 
-        restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
+          restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
+        }
       }
     }
     console.log("rests:", restaurants);
