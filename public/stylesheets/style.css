@@ -121,6 +121,8 @@ p > span {
   /* bottom: 10%; */
 }
 
+/** ### QR Code ### */
+
 .qrcodet {
   /* content: url("/images/poolroute.png"); */
   position: fixed;
@@ -140,7 +142,6 @@ p > span {
 }
 
 .textundercode {
-  /* background-color: white; */
   position: fixed;
   width: 350px;
   height: 270px;
@@ -156,41 +157,7 @@ p > span {
   left: 7%;
 }
 
-.card-deck-wrapper {
-  position: fixed;
-  top: 35%;  
-  left: 5%;
-}
-
-.card-deck-wrapper1 {
-  position: fixed;
-  top: 35%;  
-  left: 22%;
-}
-
-.card-deck-wrapperS {
-  position: fixed;
-  top: 35%;  
-  left: 15%;
-}
-
-.card-columns-wrapperM {
-  max-width: 98vw;
-  top: 20%;  
-  left: 10%;
-  right: 10%;  
-  overflow: scroll;
-}
-
-
-.card-body {
-  min-width: 290px;
-  max-width: 291px;
-  color: #ffffff;
-  background-color: #c73534;
-  font-family: Roboto;
-}
-
+/** ### end QR */
 
 .img-padding {
   max-width: 200px;
@@ -209,8 +176,6 @@ p > span {
 #checkbox101, #checkbox102, #checkbox103 {
   top: 20%;
 }
-
-
 
 .bgroup {
   position: fixed;
@@ -243,5 +208,48 @@ p > span {
   display: block;
   margin-top: 300px;
   background-color: white;
+}
+
+/** Cards (Specific Ones) */
+.card-container {
+  margin: 75px auto;
+  display: grid;
+  max-width: 90vw;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+}
+
+.card-deck-wrapper {
+  position: fixed;
+  top: 35%;  
+  left: 5%;
+}
+
+.card-deck-wrapper1 {
+  position: fixed;
+  top: 35%;  
+  left: 22%;
+}
+
+.card-deck-wrapperS {
+  position: fixed;
+  top: 35%;  
+  left: 15%;
+}
+
+.card-columns-wrapperM {
+  max-width: 90vw;
+  margin: 75px auto;
+}
+
+
+.card-body {
+  min-width: 290px;
+  max-width: 291px;
+  color: #ffffff;
+  background-color: #c73534;
+  font-family: Roboto;
+  box-sizing: border-box;
 }
 

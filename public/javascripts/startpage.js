@@ -82,20 +82,6 @@ function allStores(){
     window.location.href = "./allstores";
 }
 
-function retrieveStores(){
-    $.ajax({
-        method: "GET",
-        url: "/api/mastersheet",
-        dataType: "json",
-    }).fail(function(err){
-        console.error("Mastersheet call failed.", err)
-    }).always(function(){
-        console.info("Processing mastersheet call.")
-    }).done(function(data){
-        createButtons(data);
-    })
-}
-
 function determineSpecificRoute(category){
     if(category) window.location.href = `./specific/${category}`;
     console.log("finding cat:", category);
@@ -116,8 +102,21 @@ function fetchSpecificStores(janky){
     console.log("poops:", janky);
 }
 
+function retrieveStores(){
+    $.ajax({
+        method: "GET",
+        url: "/api/mastersheet",
+        dataType: "json",
+    }).fail(function(err){
+        console.error("Mastersheet call failed.", err)
+    }).always(function(){
+        console.info("Processing mastersheet call.")
+    }).done(function(data){
+        createButtons(data);
+    })
+}
+
 function dospecific(category){
-    console.log("triggered *autistic spaz*")
     $.ajax({
         method: "GET",
         data: {filter: category},
@@ -128,13 +127,11 @@ function dospecific(category){
         }).always(function(){
             console.info("Processing filter call.")
         }).done(function(data){
-            // console.log(data); // --> make cards, ho
             createCardsSpecific(data);
         })
 }
 
 function doroute(category){
-    console.log("triggered route *autistic spaz*")
     $.ajax({
         method: "GET",
         data: {filter: category},
@@ -145,13 +142,11 @@ function doroute(category){
         }).always(function(){
             console.info("Processing filter route call.")
         }).done(function(data){
-            console.log("route works"); 
-        
+            console.log("route works");
         })
 }
 
 function dofood(category){
-    console.log("food bitch")
     $.ajax({
         method: "GET",
         data: {filter: category},
@@ -163,22 +158,22 @@ function dofood(category){
             console.info("Processing food route call.")
         }).done(function(data){
             console.log("food works");
-            createCardsFood(data); 
+            createCardsFood(data);
         })
 }
 function createCardsSpecific( category ) {
-    console.log("yes bitch") 
+    console.log("createCardsSpecific category:", category)
     for (var i = 0; i < category.length; i++) {
         var name = category[i].name;
         var cardS =  $(`<div class="card text-center" onclick="film()">
-                            <img class="card-img-top img-padding" src="/images/cinema.png" alt="Film"/>
+                            <img class="card-img-top img-padding" src="/images/cinema.png"/>
                             <div class="card-body">
                                 <h5>`+ name +`</h5>
                             </div>
                         </div>) `)
         $(".specificcard").append(cardS)
 
-        cardS.click(cardSclicked); 
+        cardS.click(cardSclicked);
     }
 }
 
@@ -187,7 +182,6 @@ function cardSclicked(){
 }
 
 function createCardsFood( category ) {
-    console.log("yes bitch") 
     for (var i = 0; i < category.length; i++) {
         var name = category[i].name;
         var cardF =  $(`<div class="card text-center" onclick="film()">
@@ -198,6 +192,6 @@ function createCardsFood( category ) {
                         </div>) `)
         $(".specificcard").append(cardF)
 
-        cardF.click(cardSclicked); 
+        cardF.click(cardSclicked);
     }
 }
