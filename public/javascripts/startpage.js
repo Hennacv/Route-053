@@ -8,7 +8,7 @@ function displayPage(){
 }
 
 function nextPage( e ){
-    console.log("page clicked");    
+    console.log("page clicked");
     window.location.href = "./firstCh";
 }
 
@@ -162,19 +162,30 @@ function dofood(category){
         })
 }
 function createCardsSpecific( category ) {
-    console.log("createCardsSpecific category:", category)
     for (var i = 0; i < category.length; i++) {
-        var name = category[i].name;
-        var cardS =  $(`<div class="card text-center" onclick="film()">
-                            <img class="card-img-top img-padding" src="/images/cinema.png"/>
-                            <div class="card-body">
-                                <h5>`+ name +`</h5>
-                            </div>
-                        </div>) `)
-        $(".specificcard").append(cardS)
+        var location = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone,
+            location: { lat: category[i].latitude, lon: category[i].longitude } }
+        // var cardG = `<div class="card text-center">
 
-        cardS.click(cardSclicked);
+        var card = document.createElement('div');
+        card.classList = "card text-center";
+        card.innerHTML = `<img class="card-img-top img-padding" src="/images/cinema.png"/>
+                                <div class="card-body">
+                                    <h5>${location.name}</h5>
+                                </div>
+                        </div>`;
+        card.addEventListener('click', function(){
+            changchang(location);
+        })
+        console.log(card);
+
+        $(".specificcard").append(card)
     }
+}
+
+function changchang(location){
+    console.log("plip")
+    console.log(location);
 }
 
 function cardSclicked(){
