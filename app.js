@@ -95,7 +95,6 @@ router.route("/api/mastersheet").get(function(req, res) {
 
         locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
     }
-    console.log("locs:", locations);
     res.send(locations);
     })
 })
@@ -120,7 +119,6 @@ router.route("/api/specific-mastersheet").get(function(req, res) {
         locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
       }
     }
-    console.log("locs:", locations);
     res.send(locations);
     })
 })
@@ -145,7 +143,6 @@ router.route("/api/route-mastersheet").get(function(req, res) {
         locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
       }
     }
-    console.log("locs:", locations);
     res.send(locations);
     })
 })
@@ -167,7 +164,6 @@ router.route("/api/restsheet").get(function(req, res) {
 
         restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
     }
-    console.log("rests:", restaurants);
     res.send(restaurants);
     })
 })
@@ -180,8 +176,7 @@ router.route("/api/food-restsheet").get(function(req, res) {
 
     var allItems = snapshot.val();
     for(let i = 1; i < allItems.length; i++){
-        if(filter === 'Restaurant' && (("Cafe" || "Terras") !== allItems[i][2])){
-
+        if(filter === 'Restaurant' && (("Cafe" || "Terras") !== allItems[i][2])) {
           var name = allItems[i][0];
           var category = allItems[i][2];
           var subcategory = allItems[i][4];
@@ -191,23 +186,19 @@ router.route("/api/food-restsheet").get(function(req, res) {
           var longitude = allItems[i][6];
 
           restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
-        } else if(filter === allItems[i][2]){
-          
-          var name = allItems[i][0];
-          var category = allItems[i][2];
-          var subcategory = allItems[i][4];
-          var placeId = allItems[i][1];
-          var price = allItems[i][3];
-          var latitude = allItems[i][5];
-          var longitude = allItems[i][6];
-
-          restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
-        } else {
-          return;
         }
-      
+        if(filter === allItems[i][2]){
+          var name = allItems[i][0];
+          var category = allItems[i][2];
+          var subcategory = allItems[i][4];
+          var placeId = allItems[i][1];
+          var price = allItems[i][3];
+          var latitude = allItems[i][5];
+          var longitude = allItems[i][6];
+
+          restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
+        }
     }
-    console.log("rests:", restaurants);
     res.send(restaurants);
     })
 })
