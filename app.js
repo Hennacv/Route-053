@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var router = express.Router();
 var db = require('./initializesdk.js');
+var qrcode = require('qrcode');
 
 var indexRouter = require('./routes/index');
 var firstChRouter = require('./routes/firstCh');
@@ -201,6 +202,16 @@ router.route("/api/food-restsheet").get(function(req, res) {
     }
     res.send(restaurants);
     })
+})
+
+router.route("/api/create-qr").get(function(req, res) {
+  var url = req.query.url;
+  var url = url.toString();
+
+  qrcode.toDataURL(url, function (err, link) {
+    res.set('Content-Type', 'image/png');
+    res.send(link)
+  })
 })
 
 app.use("/", router);

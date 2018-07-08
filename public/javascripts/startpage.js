@@ -208,3 +208,29 @@ function createCardsFood( category ) {
         $(".foodcard").append(card)
     }
 }
+
+/** QR Code  */
+function generateQRCode(className, url){
+    var qr = createQR(url, qrcb);
+}
+
+function createQR(url){
+    $.ajax({
+        method: "GET",
+        data: {url: url},
+        url: "/api/create-qr",
+        dataType: "text",
+        }).fail(function(err){
+            console.error("Failed to create QR Code.", err)
+
+        }).always(function(){
+            console.info("Building QR Code.")
+        }).done(function(data){
+            qrcb(data);
+        })
+}
+
+function qrcb(data){
+    console.log('buffer:', data);
+    document.querySelector('.qr-code').src = data;
+}
