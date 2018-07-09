@@ -113,11 +113,10 @@ p > span {
 
 
 .map {
-  position: fixed;
-  width: 50%;
-  height: 75%;
-  left: 5%;
-  top: 18%;
+  width: 430px;
+  height: 430px;
+  top: 100px;
+  left: 30px;
   /* bottom: 10%; */
 }
 
@@ -252,4 +251,18 @@ p > span {
   font-family: Roboto;
   box-sizing: border-box;
 }
+
+/* route pages */
+
+/* ### TEMPORARY PLACEMENT */
+.qr-code {
+  position: fixed;
+  left: 500px;
+  top: 125px;
+}
+/* .route-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: 1;
+} */
 
