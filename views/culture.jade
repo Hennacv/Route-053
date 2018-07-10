@@ -8,7 +8,7 @@ block content
     .card-deck-wrapper
         .card-deck
             // Card 1
-            .card.text-center(onclick="museum()")
+            .card.text-center
                 img.card-img-top.img-padding(src='/images/museum.png', alt='Museum')
                 .card-body
                     .form-check
@@ -17,7 +17,7 @@ block content
 
                     //- p.card-text Alles van poolen tot musea en veel meer
             // Card 2
-            .card.text-center(onclick="church()")
+            .card.text-center
                 img.card-img-top.img-padding(src='/images/church.png', alt='Kerk')
                 .card-body
                     .form-check
@@ -25,12 +25,12 @@ block content
                         label.form-check-label(for='checkbox102') Kerken
                     //- p.card-text Jij kiest de winkels en wij maken de route
             // Card 3
-            .card.text-center(onclick="galleries()")
+            .card.text-center
                 img.card-img-top.img-padding(src='/images/gallery.png', alt='Gallery')
                 .card-body
                     .form-check
                         input#checkbox103.form-check-input.checky(type='checkbox')
                         label.form-check-label(for='checkbox103') Gallerijen
                     //- p.card-text Restaurants, Cafes, Terrasjes, Bars
-            button#submit-options.btn Submit        
+    button#submit-options Submit        
 

@@ -113,9 +113,9 @@ p > span {
 
 
 .map {
-  width: 430px;
-  height: 430px;
-  top: 100px;
+  width: 520px;
+  height: 520px;
+  top: 130px;
   left: 30px;
   /* bottom: 10%; */
 }
@@ -168,6 +168,11 @@ p > span {
   /* padding-left: 15px; */
 }
 
+.img-padding-t {
+  max-width: 290px;
+  position: relative;
+}
+
 .form-check-label {
   font-size: 20px;
 }
@@ -194,6 +199,25 @@ p > span {
   width: auto;
   min-height: 13vh;
   background-color: #F5F5F5;  
+}
+
+#submit-options {
+  -moz-box-shadow:inset 0px 34px 0px 0px #c73424;
+	-webkit-box-shadow:inset 0px 34px 0px 0px #c73424;
+  box-shadow:inset 0px 34px 0px 0px #c73424;
+  position: relative;
+  background-color:#a82519;
+  border:1px solid #241d13;
+  cursor:pointer;
+	color:#ffffff;
+	font-family:Roboto;
+	font-size:20px;
+	font-weight:bold;
+	padding:21px 35px;
+	text-decoration:none;
+  text-shadow:2px 1px 0px #7a2a1d;
+  top: 600px;
+  left: 450px;
 }
 
 .makemegopoof {
@@ -255,11 +279,14 @@ p > span {
 /* route pages */
 
 /* ### TEMPORARY PLACEMENT */
-/* .qr-code {
-  position: fixed;
-  left: 500px;
-  top: 125px;
-} */
+.qr-code {
+  position: relative;
+  z-index: 200;
+  left: 630px;
+  top: -390px;
+  min-width: 320px;
+}
+
 .route-wrapper {
   display: grid;
   grid-template-columns: auto auto;

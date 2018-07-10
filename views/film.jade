@@ -1,14 +1,21 @@
 extends layout
 
 block content
+    script.
+        generateQRCode('qr-code', 'http://retroactivesolutions.com/premadeRoutes/');
     div(class="bgImg")
-        div(class="topbar")
-            p(class="route053") Film
-            input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    div(class="topbar")
+        p(class="route053") Route 053
+        input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    /* create 2 column cssgrid inside route-wrapper */
+    div(class="route-wrapper")
         div.map(id="mapf")
-        img(class="qrcodet" src="/images/qr-codes/cineast.png")
-        div(class="textundercode")
-            p(class="qrtext") 1. Ga naar #[span Route053.com] #[br]
-            p(class="qrtext") 2. Scan de #[span QR Code] #[br]
-            p(class="qrtext") 3. #[span Veel plezier] met uw route
+        /* qr code needs to be set to position relative to be displayed */
+        div(class="route-information")
+            img(class="qr-code" src="#")
+            div(class="textundercode")
+                p(class="qrtext") 1. Scan de #[span QR Code] #[br]
+                p(class="qrtext") 2. Scan de #[span QR Code] #[br]
+                p(class="qrtext") 3. #[span Veel plezier] met uw route
     script(src='/javascripts/premadefilm.js')
+
