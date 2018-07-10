@@ -183,7 +183,7 @@ p > span {
 
 .bgroup {
   position: fixed;
-  top: 15%;  
+  top: 10%;  
   left: 5%;
   width: 90%;
   display: flex;
@@ -326,3 +326,18 @@ p > span {
   border: 5px solid #c73534 !important;
 }
 
+.btn {
+  position: relative;
+  box-shadow: 0px 2px #888888
+}
+
+.cat-img {
+  max-width: 130px;
+  padding-bottom: 30px;
+}
+
+.cat-p {
+  position: absolute;
+  font-family: Roboto;
+  bottom: -5px;
+}
