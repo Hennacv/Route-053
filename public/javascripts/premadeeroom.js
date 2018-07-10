@@ -13,7 +13,7 @@ function initMap() {
     placeId: 'ChIJG909vnMUuEcR0v7MzUJkrsw'
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+        var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
@@ -22,16 +22,11 @@ function initMap() {
         //Making Marker Clickable
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-            'Place ID: '
-            + place.place_id
-            + '<br>'
-            + '<br>'
+            '<br>'
             + '<b>Adress:</b>'
             + '<br>'
             + place.formatted_address
             + '</div>'
-            + '<br>'
-            + '<b>T-Mobile is an electronics store</b>'
             + '<br>'
             + 'Opening Times:'
             + '<br>'
@@ -60,7 +55,7 @@ function initMap() {
         placeId: 'ChIJY-34S3IUuEcRQInBMslCYjE'
         }, function(place, status) {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+            var iconBase = 'http://retroactivesolutions.com/premadeRoutes';
 			var marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
@@ -69,18 +64,13 @@ function initMap() {
             //Making Marker Clickable
 			google.maps.event.addListener(marker, 'click', function() {
               infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Place ID: '
-				+ place.place_id
-				+ '<br>'
-				+ '<br>'
-				+ '<b>Adress:</b>'
-				+ '<br>'
-				+ place.formatted_address
-				+ '</div>'
-				+ '<br>'
-				+ '<b>T-Mobile is an electronics store</b>'
-				+ '<br>'
-				+ 'Opening Times:'
+                '<br>'
+                + '<b>Adress:</b>'
+                + '<br>'
+                + place.formatted_address
+                + '</div>'
+                + '<br>'
+                + 'Opening Times:'
 				+ '<br>'
 				+ place.opening_hours.weekday_text[0]
 				+ '<br>'
@@ -103,7 +93,7 @@ function initMap() {
         });
 
     var map;
-	var src = 'http://retroactivesolutions.com/premadeMapForPool2/directionsEscaperoom.kml';
+	var src = 'http://retroactivesolutions.com/premadeRoutes/directionsEscaperoom.kml';
 
 	var kmlLayer = new google.maps.KmlLayer(src, {
         suppressInfoWindows: true,

@@ -2,7 +2,7 @@ extends layout
 
 block content
     script.
-        generateQRCode('qr-code', 'http://retroactivesolutions.com/premadeMapForPool2/');
+        generateQRCode('qr-code', 'http://retroactivesolutions.com/premadeRoutes/');
     div(class="bgImg")
     div(class="topbar")
         p(class="route053") Route 053
@@ -14,7 +14,7 @@ block content
         div(class="route-information")
             img(class="qr-code" src="#")
             div(class="textundercode")
-                p(class="qrtext") 1. Ga naar #[span Route053.com] #[br]
+                p(class="qrtext") 1. Scan de #[span QR Code] #[br]
                 p(class="qrtext") 2. Scan de #[span QR Code] #[br]
                 p(class="qrtext") 3. #[span Veel plezier] met uw route
     script(src='/javascripts/premadepool2.js')

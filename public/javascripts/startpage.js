@@ -163,12 +163,12 @@ function dofood(category){
 function createCards( category, className ) {
     zoneArray = [];
     for (var i = 0; i < category.length; i++) {
-        var location = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone,
+        var location = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone, logo: category[i].logo,
             location: { lat: category[i].latitude, lon: category[i].longitude } }
 
         var card = document.createElement('div');
         card.classList = "card text-center";
-        card.innerHTML = `<img class="card-img-top img-padding" src="/images/cinema.png"/>
+        card.innerHTML = `<img class="card-img-top img-padding" src="${location.logo}"/>
                                 <div class="card-body">
                                     <h5>${location.name}</h5>
                                 </div>

@@ -1,5 +1,10 @@
+$(document).ready(loadPage);
 
-$("#submit-options").on('click', submitter)
+function loadPage(){
+  $("#submit-options").click(submitter);
+}
+
+// $("#submit-options").on('click', submitter)
 
 function submitter(e){
   // e.preventDefault(); // remove if whipe needed

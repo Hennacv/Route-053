@@ -97,8 +97,9 @@ router.route("/api/mastersheet").get(function(req, res) {
         var zone = allItems[i][6];
         var latitude = allItems[i][7];
         var longitude = allItems[i][8];
+        var logo = allItems[i][9];
 
-        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
+        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude, logo: logo });
     }
     res.send(locations);
     })
@@ -120,8 +121,9 @@ router.route("/api/specific-mastersheet").get(function(req, res) {
         var zone = allItems[i][6];
         var latitude = allItems[i][7];
         var longitude = allItems[i][8];
+        var logo = allItems[i][9];
 
-        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
+        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude, logo: logo });
       }
     }
     res.send(locations);
@@ -145,8 +147,9 @@ router.route("/api/route-mastersheet").get(function(req, res) {
         var zone = allItems[i][6];
         var latitude = allItems[i][7];
         var longitude = allItems[i][8];
+        var logo = allItems[i][9];
 
-        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude });
+        locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude, logo: logo });
       }
     }
     res.send(locations);

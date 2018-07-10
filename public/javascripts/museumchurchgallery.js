@@ -13,7 +13,7 @@ function initMap() {
      placeId: 'ChIJRwShv3MUuEcRiY0kMa6o4pU'
       }, function(place, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK){
-       var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+       var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
              var marker = new google.maps.Marker(
             {
               map: map,
@@ -22,7 +22,7 @@ function initMap() {
             });
           google.maps.event.addListener(marker, 'click', function()
             {
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
             infowindow.open(map, this);
                 });
               }
@@ -34,7 +34,7 @@ function initMap() {
         }, function(place, status) {
           if (status === google.maps.places.PlacesServiceStatus.OK)
           {
-         var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+         var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
          var marker = new google.maps.Marker(
               {
                 map: map,
@@ -43,7 +43,7 @@ function initMap() {
               });
             google.maps.event.addListener(marker, 'click', function()
               {
-              infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+              infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
               infowindow.open(map, this);
               });
           }
@@ -55,7 +55,7 @@ function initMap() {
           }, function(place, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK)
             {
-           var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+           var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
            var marker = new google.maps.Marker(
                 {
                   map: map,
@@ -64,7 +64,7 @@ function initMap() {
                 });
               google.maps.event.addListener(marker, 'click', function()
                 {
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
                 infowindow.open(map, this);
                 });
             }
@@ -76,7 +76,7 @@ function initMap() {
             }, function(place, status) {
               if (status === google.maps.places.PlacesServiceStatus.OK)
               {
-             var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+             var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
                    var marker = new google.maps.Marker(
                   {
                     map: map,
@@ -85,7 +85,7 @@ function initMap() {
                   });
                 google.maps.event.addListener(marker, 'click', function()
                   {
-                  infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+                  infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
                   infowindow.open(map, this);
                       });
                     }
@@ -97,7 +97,7 @@ function initMap() {
               }, function(place, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK)
                 {
-               var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+               var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
                var marker = new google.maps.Marker(
                     {
                       map: map,
@@ -106,7 +106,7 @@ function initMap() {
                     });
                   google.maps.event.addListener(marker, 'click', function()
                     {
-                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
                     infowindow.open(map, this);
                     });
                 }
@@ -118,7 +118,7 @@ function initMap() {
                 }, function(place, status) {
                   if (status === google.maps.places.PlacesServiceStatus.OK)
                   {
-                 var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+                 var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
                  var marker = new google.maps.Marker(
                       {
                         map: map,
@@ -127,7 +127,7 @@ function initMap() {
                       });
                     google.maps.event.addListener(marker, 'click', function()
                       {
-                      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+                      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
                       infowindow.open(map, this);
                       });
                   }
@@ -139,7 +139,7 @@ function initMap() {
                   }, function(place, status) {
                     if (status === google.maps.places.PlacesServiceStatus.OK)
                     {
-                   var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+                   var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
                    var marker = new google.maps.Marker(
                         {
                           map: map,
@@ -148,7 +148,7 @@ function initMap() {
                         });
                       google.maps.event.addListener(marker, 'click', function()
                         {
-                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
                         infowindow.open(map, this);
                         });
                     }
@@ -159,7 +159,7 @@ function initMap() {
                     }, function(place, status) {
                       if (status === google.maps.places.PlacesServiceStatus.OK)
                       {
-                     var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+                     var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
                      var marker = new google.maps.Marker(
                           {
                             map: map,
@@ -168,7 +168,7 @@ function initMap() {
                           });
                         google.maps.event.addListener(marker, 'click', function()
                           {
-                          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + 'Place ID: ' + place.place_id	+ '<br>' + '<br>'	+ '<b>Adress:</b>' + '<br>'	+ place.formatted_address	+ '</div>'+ '<br>' + 'Opening Times:' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1]	+ '<br>' + place.opening_hours.weekday_text[2]	+ '<br>' + place.opening_hours.weekday_text[3]	+ '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
+                          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + '<br>' + '<b>Adress:</b>' + '<br>' + place.formatted_address + '</div>' + '<br>' + '<b>Opening Times:</b>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6]);
                           infowindow.open(map, this);
                           });
                       }
@@ -182,7 +182,7 @@ function initMap() {
     {
       if (status === google.maps.places.PlacesServiceStatus.OK)
       {
-        var iconBase = 'http://retroactivesolutions.com/premadeMapForPool2/';
+        var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
 
            var marker = new google.maps.Marker({
           map: map,
@@ -199,7 +199,7 @@ function initMap() {
     });
 
      var map;
-    var src = 'http://retroactivesolutions.com/premadeMapForPool2/Culture/directionsTheaterChurchGallery3.kml';
+    var src = 'http://retroactivesolutions.com/premadeRoutes/Culture/directionsTheaterChurchGallery3.kml';
 
     var kmlLayer = new google.maps.KmlLayer(src, {
       suppressInfoWindows: true,
