@@ -13,7 +13,7 @@ function initMap() {
     placeId: 'ChIJG909vnMUuEcR0v7MzUJkrsw'
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
+        var iconBase = 'http://chananbos.com/pinkball/icons/';
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
@@ -55,7 +55,7 @@ function initMap() {
         placeId: 'ChIJY-34S3IUuEcRQInBMslCYjE'
         }, function(place, status) {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            var iconBase = 'http://retroactivesolutions.com/premadeRoutes';
+            var iconBase = 'http://chananbos.com/pinkball/icons/';
 			var marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
@@ -93,7 +93,7 @@ function initMap() {
         });
 
     var map;
-	var src = 'http://retroactivesolutions.com/premadeRoutes/directionsEscaperoom.kml';
+	var src = 'http://chananbos.com/pinkball/premadeRoutes/directionsEscaperoom.kml';
 
 	var kmlLayer = new google.maps.KmlLayer(src, {
         suppressInfoWindows: true,

@@ -13,7 +13,7 @@ function initMap() {
     placeId: 'ChIJ3TIlNHEUuEcRo7vTQKW0QDY'
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        var iconBase = 'http://retroactivesolutions.com/icons/';
+        var iconBase = 'http://chananbos.com/pinkball/icons/';
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
@@ -56,7 +56,7 @@ function initMap() {
         placeId: 'ChIJY-34S3IUuEcRQInBMslCYjE'
         }, function(place, status) {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            var iconBase = 'http://retroactivesolutions.com/premadeRoutes/';
+            var iconBase = 'http://chananbos.com/pinkball/icons/';
 			var marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
@@ -95,7 +95,7 @@ function initMap() {
         });
 
     var map;
-	var src = 'http://retroactivesolutions.com/premadeRoutes/directionsPool2.kml';
+	var src = 'http://chananbos.com/pinkball/premadeRoutes/directionsPool2.kml';
 
 	var kmlLayer = new google.maps.KmlLayer(src, {
         suppressInfoWindows: true,

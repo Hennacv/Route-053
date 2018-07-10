@@ -14,7 +14,7 @@ function initMap() {
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK)
       {
-     var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
+     var iconBase = 'http://chananbos.com/pinkball/icons/';
            var marker = new google.maps.Marker(
           {
             map: map,
@@ -35,7 +35,7 @@ function initMap() {
       }, function(place, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK)
         {
-       var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
+       var iconBase = 'http://chananbos.com/pinkball/icons/';
        var marker = new google.maps.Marker(
             {
               map: map,
@@ -56,7 +56,7 @@ function initMap() {
         }, function(place, status) {
           if (status === google.maps.places.PlacesServiceStatus.OK)
           {
-         var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
+         var iconBase = 'http://chananbos.com/pinkball/icons/';
          var marker = new google.maps.Marker(
               {
                 map: map,
@@ -78,7 +78,7 @@ function initMap() {
     {
       if (status === google.maps.places.PlacesServiceStatus.OK)
       {
-        var iconBase = 'http://retroactivesolutions.com/premadeRoutes/icons';
+        var iconBase = 'http://chananbos.com/pinkball/icons/';
 
            var marker = new google.maps.Marker({
           map: map,
@@ -95,7 +95,7 @@ function initMap() {
     });
 
      var map;
-    var src = 'http://retroactivesolutions.com/premadeRoutes/Culture/directionsGallery.kml';
+    var src = 'http://chananbos.com/pinkball/Culture/directionsGallery.kml';
 
     var kmlLayer = new google.maps.KmlLayer(src, {
       suppressInfoWindows: true,

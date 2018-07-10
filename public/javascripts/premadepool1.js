@@ -13,11 +13,11 @@ function initMap() {
     placeId: 'ChIJHdpjg3MUuEcRU7vwSFdUl-E'
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        var iconBase = 'http://retroactivesolutions.com/icons/';
+        var iconBase = 'http://chananbos.com/pinkball/icons/';
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
-           icon: iconBase + 'icon-poolen.png'
+          icon: iconBase + 'icon-poolen.png'
         });
         //Making Marker Clickable
         google.maps.event.addListener(marker, 'click', function() {
@@ -46,8 +46,8 @@ function initMap() {
             + place.opening_hours.weekday_text[6]
             );
           infowindow.open(map, this);
-         });
-         //End of clickable
+        });
+        //End of clickable
       }
     });
 
@@ -56,11 +56,11 @@ function initMap() {
         placeId: 'ChIJY-34S3IUuEcRQInBMslCYjE'
         }, function(place, status) {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            // var iconBase = 'http://retroactivesolutions.com/premadeRoutes/';
+            var iconBase = 'http://chananbos.com/pinkball/icons/';
 			var marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
-			 //  icon: iconBase + 'poolmarker.png'
+			//  icon: iconBase + 'poolmarker.png'
             });
             //Making Marker Clickable
 			google.maps.event.addListener(marker, 'click', function() {
@@ -89,13 +89,13 @@ function initMap() {
               + place.opening_hours.weekday_text[6]
               );
             infowindow.open(map, this);
-           });
-			 //End of clickable
+          });
+			//End of clickable
           }
         });
 
     var map;
-	var src = 'http://retroactivesolutions.com/premadeRoutes/directionsPool1.kml';
+	var src = 'http://chananbos.com/pinkball/premadeRoutes/directionsPool1.kml';
 
 	var kmlLayer = new google.maps.KmlLayer(src, {
         suppressInfoWindows: true,
