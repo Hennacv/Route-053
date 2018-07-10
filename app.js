@@ -132,6 +132,7 @@ router.route("/api/route-mastersheet").get(function(req, res) {
 
     var allItems = snapshot.val();
     for(let i = 1; i < allItems.length; i++){
+      console.log("items:", allItems[i]);
       if(filter === allItems[i][2]){
         var name = allItems[i][1];
         var category = allItems[i][2];

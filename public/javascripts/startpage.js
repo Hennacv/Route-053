@@ -1,5 +1,6 @@
 $(document).ready(displayPage);
-var list;
+
+var list, zoneArray = [];
 
 function displayPage(){
     var clicky = document.querySelector(".clickable");
@@ -82,17 +83,17 @@ function allStores(){
 }
 
 function determineSpecificRoute(category){
-    if(category) window.location.href = `./specific/${category}`;
+    if(category) window.location.href = `/specific/${category}`;
     console.log("finding cat:", category);
 }
 
 function determineMultipleRoute(category){
-    if(category) window.location.href = `./route/${category}`;
+    if(category) window.location.href = `/route/${category}`;
     console.log("finding cat2:", category);
 }
 
 function determineFood(category){
-    if(category) window.location.href = `./food/${category}`;
+    if(category) window.location.href = `/food/${category}`;
     console.log("finding food:", category);
 }
 
@@ -126,7 +127,7 @@ function dospecific(category){
         }).always(function(){
             console.info("Processing filter call.")
         }).done(function(data){
-            createCardsSpecific(data);
+            createCards(data, "specificcard");
         })
 }
 
@@ -141,12 +142,11 @@ function doroute(category){
         }).always(function(){
             console.info("Processing filter route call.")
         }).done(function(data){
-            console.log("route works");
+            createCards(data, "routecard");
         })
 }
 
 function dofood(category){
-    console.log("bitch please:", category)
     $.ajax({
         method: "GET",
         data: {filter: category},
@@ -157,11 +157,12 @@ function dofood(category){
         }).always(function(){
             console.info("Processing food route call.")
         }).done(function(data){
-            console.log("food works");
-            createCardsFood(data);
+            createCards(data, "foodcard");
         })
 }
-function createCardsSpecific( category ) {
+
+function createCards( category, className ) {
+    zoneArray = [];
     for (var i = 0; i < category.length; i++) {
         var location = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone,
             location: { lat: category[i].latitude, lon: category[i].longitude } }
@@ -173,40 +174,59 @@ function createCardsSpecific( category ) {
                                     <h5>${location.name}</h5>
                                 </div>
                         </div>`;
-        card.addEventListener('click', function(){
-            var zone = getLetter(location.zone);
-            console.log("zone:", zone);
-        })
-
-        $(".specificcard").append(card)
+        addClickEvent(card, location);
+        $(`.${className}`).append(card)
     }
 }
 
-function changchang(location){
-    var zone = getLetter(location.zone);
-    console.log("zone:", zone);
+function addClickEvent(card, location){
+    card.addEventListener('click', function(){
+        handleZoning(this, location);
+    })
 }
 
-function createCardsFood( category ) {
-    for (var i = 0; i < category.length; i++) {
-        var restaurant = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone,
-            location: { lat: category[i].latitude, lon: category[i].longitude } }
-        
-            console.log("rests:", restaurant);
-
-        var card = document.createElement('div');
-        card.classList = "card text-center";
-        card.innerHTML = `<img class="card-img-top img-padding" src="/images/cinema.png"/>
-                                <div class="card-body">
-                                    <h5>${restaurant.name}</h5>
-                                </div>
-                        </div>`;
-        card.addEventListener('click', function(){
-            var zone = getLetter(restaurant.zone);
-            console.log("zone:", zone);
+function handleZoning(el, location){
+    if(checkDuplicate(location)){
+        el.classList.remove("selected-card");
+        zoneArray = zoneArray.filter(function(el){
+            return el.placeId !== location.placeId
         })
-        $(".foodcard").append(card)
+    } else {
+        el.classList.add("selected-card");
+        zoneArray.push(location);
     }
+    counterButton();
+}
+
+function checkDuplicate(location){
+    var found = false;
+    for(var i = 0; i < zoneArray.length; i++) {
+        if (zoneArray[i].placeId === location.placeId) {
+            found = true;
+            break;
+        }
+    }
+    return found;
+}
+
+function counterButton(){
+    var btn = document.querySelector('.submit-button');
+    var selectedAmount = zoneArray.length;
+
+    if(zoneArray.length > 0){
+        btn.classList = "submit-button counting"
+        btn.textContent = `Submit ${selectedAmount}`
+    } else {
+        btn.classList = "submit-button inactive";
+        btn.textContent = "Submit"
+    }
+}
+
+/** Zoning */
+
+function submitZones(){
+    if(zoneArray.length <= 1) return false;
+    console.log("za:", zoneArray);
 }
 
 /** QR Code  */

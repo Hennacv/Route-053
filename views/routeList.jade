@@ -1,16 +1,16 @@
 extends layout
 
 block content
-    script(src='/javascripts/startpage.js')
     div(id="category" class="makemegopoof") !{category}
     script.
-        var category = document.getElementById('category').textContent;
-        console.log("peop2");
-        doroute(category);
+        window.onload = function(){
+            var category = document.getElementById('category').textContent;
+            console.log("peop2");
+            doroute(category);
+        }
     div(class="bgImg")
-        //- div.myownbitchassbutton(onclick=`dothing('${category}')`) click me whore
-        div(class="topbar")
-            p(class="route053") Route of !{category}
-            input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
-        .card-columns-wrapperM
-            .card-columns.specificcard
+    .card-container.routecard
+    div(class="topbar")
+        p(class="route053") List of !{category}
+        input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+        div(class="submit-button inactive" onclick="submitZones()") Submit
