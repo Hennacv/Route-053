@@ -255,14 +255,43 @@ p > span {
 /* route pages */
 
 /* ### TEMPORARY PLACEMENT */
-.qr-code {
+/* .qr-code {
   position: fixed;
   left: 500px;
   top: 125px;
-}
-/* .route-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-template-rows: 1;
 } */
+.route-wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1;
+}
+
+/** Submit Button in Top bar */
+.submit-button {
+  position: relative;
+  width: 100px;
+  left: 700px;
+  top: 10px;
+
+  text-align: center;
+  border: 1px #fff solid;
+  padding: 4px;
+  border-radius: 4px;
+  color: #c73534;
+  background-color: #fff;
+}
+
+.inactive {
+  background-color: transparent;
+  color: grey;
+}
+
+.counting {
+  color: #fff;
+  background-color: transparent;
+}
+
+.selected-card {
+  border: 5px solid #c73534 !important;
+}
 

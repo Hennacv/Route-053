@@ -1,11 +1,12 @@
 extends layout
 
 block content
-    script(src='/javascripts/startpage.js')
     div(id="category" class="makemegopoof") !{category}
     script.
-        var category = document.getElementById('category').textContent;
-        dospecific(category);
+        window.onload = function(){
+            var category = document.getElementById('category').textContent;
+            dospecific(category);
+        }
     div(class="bgImg")
     .card-container.specificcard
     div(class="topbar")
