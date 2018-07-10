@@ -101,6 +101,24 @@ function specificChoice(location){
     if(location) window.location.href = `/specific/choice/${location}`
 }
 
+// ####### Core Paths ###################################################
+
+function fetchRestaurants(listId){
+    if(listId) window.location.href = `/list/restSheet/${listId}`;
+}
+
+function fetchCulture(listId){
+    if(listId) window.location.href = `/list/cultureSheet/${listId}`;
+}
+
+function fetchStores(listId){
+    if(listId) window.location.href = `/list/masterSheet/${listId}`;
+}
+
+// missing qr path
+
+// ######################################################################
+
 function retrieveStores(){
     $.ajax({
         method: "GET",
@@ -310,4 +328,23 @@ function generateQRCode(className, url){
             console.log("data:", data);
             document.querySelector("." + className).src = data;
         })
+}
+
+// ######### CORE APIs ###############################################
+
+function displayLocations(data){
+    var className = data.className;
+    $.ajax({
+        method: "GET",
+        data: data,
+        url: "/api/fetchList",
+        dataType: "json",
+    }).fail(function(err){
+        console.error("Filter food Sheet call failed.", err)
+    }).always(function(){
+        console.info("Processing food route call.")
+    }).done(function(data){
+        console.log("display stores data:", data);
+        createCards(data, className);
+    })
 }
