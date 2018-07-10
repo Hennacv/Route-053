@@ -212,9 +212,11 @@ router.route("/api/food-restsheet").get(function(req, res) {
     })
 })
 
-router.route("/api/create-qr").get(function(req, res) {
-  var url = req.query.url;
-  var url = url.toString();
+router.route("/api/single-qr").get(function(req, res) {
+  var url = "https://lit-shelf-70756.herokuapp.com/qr/location/";
+  var urlLocation = req.query.link.split(',');
+  var string = `@${urlLocation[0]},${urlLocation[1]},${urlLocation[2]}`
+  url += string;
 
   qrcode.toDataURL(url, function (err, link) {
     res.set('Content-Type', 'image/png');
@@ -246,6 +248,8 @@ router.route("/api/qr-generator").post(function(req, res) {
     res.send(link)
   })
 })
+
+
 
 app.use("/", router);
 

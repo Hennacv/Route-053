@@ -194,7 +194,7 @@ function handleSingleLocation(el, location){
         el.classList.add("selected-card");
         zoneArray.push(location);
         this.removeEventListener('click', el);
-        var urlString = location.placeId + location.location.lat + location.location.lon;
+        var urlString = location.placeId + "," + location.location.lat + "," + location.location.lon;
         urlString.toString();
         specificChoice(urlString);
     }
@@ -245,7 +245,27 @@ function counterButton(){
 
 /** Zoning */
 
-function submitZones(){
+function singleLocationQR(location){
+    if(location.split(',').length === 3){
+        $.ajax({
+            method: "GET",
+            data: {link: location},
+            url: "/api/single-qr",
+            dataType: "json",
+        }).fail(function(err){
+            console.error("Single QR generation call failed.", err)
+            var resp = err.responseText;
+            document.querySelector('.qr-code').src = resp;
+        }).always(function(){
+            console.info("Processing filter route call.")
+        }).done(function(data){
+            console.log("image:", data);
+            document.querySelector('.qr-code').src = data;
+        })
+    }
+}
+
+function submitZones(location){
     if(zoneArray.length <= 1) return false;
     var jsonString = JSON.stringify(zoneArray);
     $.ajax({
