@@ -173,9 +173,13 @@ function createCardsSpecific( category ) {
                                     <h5>${location.name}</h5>
                                 </div>
                         </div>`;
+
+        console.log("name:", name);
+
         card.addEventListener('click', function(){
             var zone = getLetter(location.zone);
-            console.log("zone:", zone);
+            console.log("name:", location.name);
+            console.log("zone:", location.zone);
         })
 
         $(".specificcard").append(card)
