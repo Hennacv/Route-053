@@ -341,3 +341,20 @@ function generateQRCode(className, url){
             document.querySelector("." + className).src = data;
         })
 }
+
+// ######## GOOGLE MAPS API ####################
+
+function createMap(name, dataString){
+    var dataArr = dataString.split(",");
+    var location = {
+        name: name,
+        placeId: dataArr[0],
+        location: {
+            lat: parseFloat(dataArr[1]),
+            lng: parseFloat(dataArr[2])
+        }
+    }
+
+    console.log("location:", location);
+    initMap("qr-map", location)
+}

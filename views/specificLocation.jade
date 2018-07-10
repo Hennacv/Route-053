@@ -9,13 +9,14 @@ block content
             var dataString = document.getElementById('dataString').textContent;
             //- var data = { name: name, dataString: dataString }
             singleLocationQR(dataString);
+            createMap(name, dataString);
         }
     div(class="bgImg")
     div(class="topbar")
         p(class="route053") Zoeken naar !{name}
         input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
     div(class="route-wrapper")
-        div.map(id="bridge")
+        div.map(id="qr-map")
         div(class="route-information")
             img(class="qr-code")
             div(class="textundercode")

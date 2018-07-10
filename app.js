@@ -257,7 +257,7 @@ router.route("/api/food-restsheet").get(function(req, res) {
 
 router.route("/api/qr-single").get(function(req, res) {
   console.log("REQ:", req);
-  var url = "https://lit-shelf-70756.herokuapp.com/qr/location/";
+  var url = "http://www.route053.com/qr/location/";
   var urlLocation = req.query.link.split(',');
   var string = `@${urlLocation[0]},${urlLocation[1]},${urlLocation[2]}`
   url += string;
@@ -280,7 +280,7 @@ router.route("/api/qr-generic").get(function(req, res) {
 
 router.route("/api/qr-multiple").post(function(req, res) {
   var markers = req.body;
-  var url = "https://lit-shelf-70756.herokuapp.com/qr/location/";
+  var url = "http://www.route053.com/qr/location/";
 
   for(let i = 0; i < markers.length; i++){
     var placeId = markers[i].placeId;
