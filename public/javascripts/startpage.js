@@ -174,7 +174,6 @@ function createCards( category, className ) {
                                     <h5>${location.name}</h5>
                                 </div>
                         </div>`;
-<<<<<<< HEAD
 
         console.log("name:", name);
 
@@ -183,12 +182,10 @@ function createCards( category, className ) {
             console.log("name:", location.name);
             console.log("zone:", location.zone);
         })
-=======
         addClickEvent(card, location);
         $(`.${className}`).append(card)
     }
 }
->>>>>>> f74b6d57d855189bb083c93930a0a7efc5f6ae4b
 
 function addClickEvent(card, location){
     card.addEventListener('click', function(){

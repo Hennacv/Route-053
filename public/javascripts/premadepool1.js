@@ -17,7 +17,7 @@ function initMap() {
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
-           icon: iconBase + 'poolmarker.png'
+           icon: iconBase + 'icon-poolen.png'
         });
         //Making Marker Clickable
         google.maps.event.addListener(marker, 'click', function() {
@@ -27,7 +27,7 @@ function initMap() {
             + '<b>Adress:</b>'
             + '<br>'
             + place.formatted_address
-            + '<br>'
+            + '</div>'
             + '<br>'
             + '<b>Opening Times:</b>'
             + '<br>'
@@ -70,7 +70,7 @@ function initMap() {
               + '<b>Adress:</b>'
               + '<br>'
               + place.formatted_address
-              + '<br>'
+              + '</div>'
               + '<br>'
               + '<b>Opening Times:</b>'
               + '<br>'
@@ -95,7 +95,7 @@ function initMap() {
         });
 
     var map;
-	var src = 'http://retroactivesolutions.com/Route053/premadeRoutes/directionsPool1.kml';
+	var src = 'http://retroactivesolutions.com/premadeRoutes/directionsPool1.kml';
 
 	var kmlLayer = new google.maps.KmlLayer(src, {
         suppressInfoWindows: true,
