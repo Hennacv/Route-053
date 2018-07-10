@@ -25,6 +25,7 @@ var foodRouter = require('./routes/food');
 var specificList = require('./routes/foodChoice');
 var specificRouter = require('./routes/specific');
 var specificList = require('./routes/specificList');
+var specificChoice = require('./routes/specificChoice');
 var routeRouter = require('./routes/route');
 var routeList = require('./routes/routeList');
 var allstoresRouter = require('./routes/allstores');
@@ -71,6 +72,9 @@ app.use('/musgal', musgalRouter);
 app.use('/chgal', chgalRouter);
 app.get('/specific/:category', function(req, res, next){
   res.render('specificList', { title: 'Route 053', category: req.params.category });
+});
+app.get('/specific/choice/:location', function(req, res, next){
+  res.render('specificChoice', { title: 'Route 053', location: req.params.location });
 });
 app.get('/route/:category', function(req, res, next){
   res.render('routeList', { title: 'Route 053', category: req.params.category });
@@ -211,6 +215,31 @@ router.route("/api/create-qr").get(function(req, res) {
 
   qrcode.toDataURL(url, function (err, link) {
     res.set('Content-Type', 'image/png');
+    res.send(link)
+  })
+})
+
+router.route("/api/qr-generator").post(function(req, res) {
+  var markers = req.body;
+  var url = "https://lit-shelf-70756.herokuapp.com/qr/location/";
+
+  for(let i = 0; i < markers.length; i++){
+    var placeId = markers[i].placeId;
+    var lat = markers[i].location.lat;
+    var lon = markers[i].location.lon;
+
+    if( i === (markers.length-1) ){
+      var string = `@${placeId},${lat},${lon}`
+      url += string;
+    } else {
+      var string = `@${placeId},${lat},${lon}|`
+      url += string;
+    }
+  }
+
+  qrcode.toDataURL(url, function (err, link) {
+    // res.set('Content-Type', 'image/png');
+    // res.writeHead("200", {'Content-Type': 'image/png'})
     res.send(link)
   })
 })

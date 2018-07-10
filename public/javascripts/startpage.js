@@ -97,9 +97,8 @@ function determineFood(category){
     console.log("finding food:", category);
 }
 
-function fetchSpecificStores(janky){
-    console.log("fuck me");
-    console.log("poops:", janky);
+function specificChoice(location){
+    if(location) window.location.href = `/specific/choice/${location}`
 }
 
 function retrieveStores(){
@@ -174,8 +173,30 @@ function createCards( category, className ) {
                                     <h5>${location.name}</h5>
                                 </div>
                         </div>`;
-        addClickEvent(card, location);
+
+        if(className === "specificcard"){
+            addSingleClick(card, location);
+        } else {
+            addClickEvent(card, location);
+        }
         $(`.${className}`).append(card)
+    }
+}
+
+function addSingleClick(card, location){
+    card.addEventListener('click', function(){
+        handleSingleLocation(this, location);
+    })
+}
+
+function handleSingleLocation(el, location){
+    if(zoneArray.length === 0){
+        el.classList.add("selected-card");
+        zoneArray.push(location);
+        this.removeEventListener('click', el);
+        var urlString = location.placeId + location.location.lat + location.location.lon;
+        urlString.toString();
+        specificChoice(urlString);
     }
 }
 
@@ -226,57 +247,75 @@ function counterButton(){
 
 function submitZones(){
     if(zoneArray.length <= 1) return false;
-    var zones = {
-        zone0:  { zone: '0', value: 0, letter: 'nah' },
-        zone1:  { zone: '1', value: 0, letter: 'a' },
-        zone2:  { zone: '2', value: 0, letter: 'b' },
-        zone3:  { zone: '3', value: 0, letter: 'c' },
-        zone4:  { zone: '4', value: 0, letter: 'd' },
-        zone5:  { zone: '5', value: 0, letter: 'e' },
-        zone6:  { zone: '6', value: 0, letter: 'f' },
-        zone7:  { zone: '7', value: 0, letter: 'j' },
-        zone8:  { zone: '8', value: 0, letter: 'k' },
-        zone9:  { zone: '9', value: 0, letter: 'l' },
-        zone10: { zone: '10', value: 0, letter: 'm' },
-        zone11: { zone: '11', value: 0, letter: 'n' },
-        zone12: { zone: '12', value: 0, letter: 'o' },
-        zone13: { zone: '13', value: 0, letter: 'p' },
-        zone14: { zone: '14', value: 0, letter: 'r' },
-        zone15: { zone: '15', value: 0, letter: 's' },
-        zone16: { zone: '16', value: 0, letter: 't' },
-        zone17: { zone: '17', value: 0, letter: 'u' },
-        zoneplaceholder18: { zone: 'none', value: 0, letter: 'z' }
-    }
+    var jsonString = JSON.stringify(zoneArray);
+    $.ajax({
+        method: "post",
+        data: jsonString,
+        url: "/api/qr-generator",
+        dataType: "json",
+        contentType: "application/json",
+    }).fail(function(err){
+        console.error("Filter Route Sheet call failed.", err)
+        var resp = err.responseText;
+        document.querySelector('.routeList-qr-code-popup-img').src = resp;
+    }).always(function(){
+        console.info("Processing filter route call.")
+    }).done(function(data){
+        console.log("image:", data);
+        document.querySelector('.routeList-qr-code-popup-img').src = data;
+    })
+    // var zones = {
+    //     zone0:  { zone: '0', value: 0, letter: 'nah' },
+    //     zone1:  { zone: '1', value: 0, letter: 'a' },
+    //     zone2:  { zone: '2', value: 0, letter: 'b' },
+    //     zone3:  { zone: '3', value: 0, letter: 'c' },
+    //     zone4:  { zone: '4', value: 0, letter: 'd' },
+    //     zone5:  { zone: '5', value: 0, letter: 'e' },
+    //     zone6:  { zone: '6', value: 0, letter: 'f' },
+    //     zone7:  { zone: '7', value: 0, letter: 'j' },
+    //     zone8:  { zone: '8', value: 0, letter: 'k' },
+    //     zone9:  { zone: '9', value: 0, letter: 'l' },
+    //     zone10: { zone: '10', value: 0, letter: 'm' },
+    //     zone11: { zone: '11', value: 0, letter: 'n' },
+    //     zone12: { zone: '12', value: 0, letter: 'o' },
+    //     zone13: { zone: '13', value: 0, letter: 'p' },
+    //     zone14: { zone: '14', value: 0, letter: 'r' },
+    //     zone15: { zone: '15', value: 0, letter: 's' },
+    //     zone16: { zone: '16', value: 0, letter: 't' },
+    //     zone17: { zone: '17', value: 0, letter: 'u' },
+    //     zoneplaceholder18: { zone: 'none', value: 0, letter: 'z' }
+    // }
 
-    console.log("zoneArr:", zoneArray);
-    for( var i = 0; i < zoneArray.length; i++ ){
-        var singleZone = zoneArray[i].zone;
-        var propertyName = "zone" + singleZone;
-        if(zones.hasOwnProperty(propertyName)){
-            zones[propertyName].value = zones[propertyName].value + 1
-        } else {
-            zones[propertyName].value = 1;
-        }
-    }
-    debugger;
-    var candidates = [
-        { zonedot: "abc", value1: zones.zone1.zone, value2: zones.zone2.zone, value3: zones.zone3.zone   },
-        { zonedot: "bst", value1: zones.zone2.zone, value2: zones.zone15.zone, value3: zones.zone16.zone   },
-        { zonedot: "stur", value1: zones.zone15.zone, value2: zones.zone16.zone, value3: zones.zone17.zone, zonedotValue4: zones.zone14.zone  },
-        { zonedot: "rpo", value1: zones.zone14.zone, value2: zones.zone13.zone, value3: zones.zone12.zone   },
-        { zonedot: "opn", value1: zones.zone12.zone, value2: zones.zone13.zone, value3: zones.zone11.zone   },
-        { zonedot: "umn", value1: zones.zone17.zone, value2: zones.zone10.zone, value3: zones.zone11.zone   },
-        { zonedot: "clm", value1: zones.zone3.zone, value2: zones.zone9.zone, value3: zones.zone10.zone   },
-        { zonedot: "lkj", value1: zones.zone9.zone, value2: zones.zone8.zone, value3: zones.zone7.zone   },
-        { zonedot: "kfe", value1: zones.zone8.zone, value2: zones.zone6.zone, value3: zones.zone5.zone   },
-        { zonedot: "adfe", value1: zones.zone1.zone, value2: zones.zone4.zone, value3: zones.zone6.zone, zonedotValue4: zones.zone5.zone  }
-    ];
+    // console.log("zoneArr:", zoneArray);
+    // for( var i = 0; i < zoneArray.length; i++ ){
+    //     var singleZone = zoneArray[i].zone;
+    //     var propertyName = "zone" + singleZone;
+    //     if(zones.hasOwnProperty(propertyName)){
+    //         zones[propertyName].value = zones[propertyName].value + 1
+    //     } else {
+    //         zones[propertyName].value = 1;
+    //     }
+    // }
+    // debugger;
+    // var candidates = [
+    //     { zonedot: "abc", value1: zones.zone1.zone, value2: zones.zone2.zone, value3: zones.zone3.zone   },
+    //     { zonedot: "bst", value1: zones.zone2.zone, value2: zones.zone15.zone, value3: zones.zone16.zone   },
+    //     { zonedot: "stur", value1: zones.zone15.zone, value2: zones.zone16.zone, value3: zones.zone17.zone, zonedotValue4: zones.zone14.zone  },
+    //     { zonedot: "rpo", value1: zones.zone14.zone, value2: zones.zone13.zone, value3: zones.zone12.zone   },
+    //     { zonedot: "opn", value1: zones.zone12.zone, value2: zones.zone13.zone, value3: zones.zone11.zone   },
+    //     { zonedot: "umn", value1: zones.zone17.zone, value2: zones.zone10.zone, value3: zones.zone11.zone   },
+    //     { zonedot: "clm", value1: zones.zone3.zone, value2: zones.zone9.zone, value3: zones.zone10.zone   },
+    //     { zonedot: "lkj", value1: zones.zone9.zone, value2: zones.zone8.zone, value3: zones.zone7.zone   },
+    //     { zonedot: "kfe", value1: zones.zone8.zone, value2: zones.zone6.zone, value3: zones.zone5.zone   },
+    //     { zonedot: "adfe", value1: zones.zone1.zone, value2: zones.zone4.zone, value3: zones.zone6.zone, zonedotValue4: zones.zone5.zone  }
+    // ];
 
-    console.log("initial zones:", zones);
-    console.table(candidates);
-    debugger;
-    var calculatedFinalists = determineFinalists(zones, candidates);
-    console.log("finalists:", calculatedFinalists);
+    // console.log("initial zones:", zones);
+    // console.table(candidates);
+    // debugger;
+    // var calculatedFinalists = determineFinalists(zones, candidates);
+    // console.log("finalists:", calculatedFinalists);
+
 }
 
 /** QR Code  */
