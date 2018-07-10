@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    div(id="name" class="makemegopoof") !{name}
+    div(id="dataString" class="makemegopoof") !{dataString}
+    script.
+        window.onload = function(){
+            var name = document.getElementById('name').textContent;
+            var dataString = document.getElementById('dataString').textContent;
+            //- var data = { name: name, dataString: dataString }
+            singleLocationQR(dataString);
+        }
+    div(class="bgImg")
+    div(class="topbar")
+        p(class="route053") Locating !{name}
+        input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    div(class="route-wrapper")
+        div.map(id="bridge")
+        div(class="route-information")
+            img(class="qr-code")
+            div(class="textundercode")
+                p(class="qrtext") 1. Scan de #[span QR Code] #[br]
+                p(class="qrtext") 2. Scan de #[span QR Code] #[br]
+                p(class="qrtext") 3. #[span Veel plezier] met uw route

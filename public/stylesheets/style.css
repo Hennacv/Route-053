@@ -286,9 +286,10 @@ p > span {
 .qr-code {
   position: relative;
   z-index: 200;
-  left: 630px;
+  top: 100px;
+  /* left: 630px;
   top: -390px;
-  min-width: 320px;
+  min-width: 320px; */
 }
 
 .route-wrapper {

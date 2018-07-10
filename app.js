@@ -35,6 +35,7 @@ var musgalRouter = require('./routes/musgal');
 var chgalRouter = require('./routes/chgal');
 
 var listId = require('./routes/listId');
+var specificLocation = require('./routes/specificLocation');
 
 
 var app = express();
@@ -87,7 +88,10 @@ app.get('/food/:category', function(req, res, next){
 
 // ######## BIG CHANGES INCOMING
 app.get('/list/:sheetId/:listId', function(req, res, next){
-  res.render('listId', { title: 'Route 053', sheetId: req.params.sheetId, listId: req.params.listId });
+  res.render('listId', { title: 'Listing Locations', sheetId: req.params.sheetId, listId: req.params.listId });
+});
+app.get('/qr/:name/:dataString', function(req, res, next){
+  res.render('specificLocation', { title: 'Locating Location', name: req.params.name, dataString: req.params.dataString });
 });
 
 router.route("/api/fetchList").get(function(req, res){
@@ -116,9 +120,7 @@ router.route("/api/fetchList").get(function(req, res){
         });
       }
     }
-    console.log("locs:", locations);
     res.send(locations);
-
   })
 })
 
@@ -253,11 +255,13 @@ router.route("/api/food-restsheet").get(function(req, res) {
     })
 })
 
-router.route("/api/single-qr").get(function(req, res) {
+router.route("/api/qr-single").get(function(req, res) {
+  console.log("REQ:", req);
   var url = "https://lit-shelf-70756.herokuapp.com/qr/location/";
   var urlLocation = req.query.link.split(',');
   var string = `@${urlLocation[0]},${urlLocation[1]},${urlLocation[2]}`
   url += string;
+  console.log("URL STRING:", url);
 
   qrcode.toDataURL(url, function (err, link) {
     res.set('Content-Type', 'image/png');
@@ -265,7 +269,7 @@ router.route("/api/single-qr").get(function(req, res) {
   })
 })
 
-router.route("/api/create-qr").get(function(req, res) {
+router.route("/api/qr-generic").get(function(req, res) {
   var url = req.query.url;
 
   qrcode.toDataURL(url, function (err, link) {
@@ -274,7 +278,7 @@ router.route("/api/create-qr").get(function(req, res) {
   })
 })
 
-router.route("/api/qr-generator").post(function(req, res) {
+router.route("/api/qr-multiple").post(function(req, res) {
   var markers = req.body;
   var url = "https://lit-shelf-70756.herokuapp.com/qr/location/";
 

@@ -115,71 +115,72 @@ function fetchStores(listId){
     if(listId) window.location.href = `/list/masterSheet/${listId}`;
 }
 
-// missing qr path
+function fetchQRCode(name, dataString){
+    if(dataString) window.location.href = `/qr/${name}/${dataString}`;
+}
 
 // ######################################################################
 
-function retrieveStores(){
-    $.ajax({
-        method: "GET",
-        url: "/api/mastersheet",
-        dataType: "json",
-    }).fail(function(err){
-        console.error("Mastersheet call failed.", err)
-    }).always(function(){
-        console.info("Processing mastersheet call.")
-    }).done(function(data){
-        createButtons(data);
-    })
-}
+// function retrieveStores(){
+//     $.ajax({
+//         method: "GET",
+//         url: "/api/mastersheet",
+//         dataType: "json",
+//     }).fail(function(err){
+//         console.error("Mastersheet call failed.", err)
+//     }).always(function(){
+//         console.info("Processing mastersheet call.")
+//     }).done(function(data){
+//         createButtons(data);
+//     })
+// }
 
-function dospecific(category){
-    $.ajax({
-        method: "GET",
-        data: {filter: category},
-        url: "/api/specific-mastersheet",
-        dataType: "json",
-        }).fail(function(err){
-            console.error("Filter Sheet call failed.", err)
-        }).always(function(){
-            console.info("Processing filter call.")
-        }).done(function(data){
-            createCards(data, "specificcard");
-        })
-}
+// function dospecific(category){
+//     $.ajax({
+//         method: "GET",
+//         data: {filter: category},
+//         url: "/api/specific-mastersheet",
+//         dataType: "json",
+//         }).fail(function(err){
+//             console.error("Filter Sheet call failed.", err)
+//         }).always(function(){
+//             console.info("Processing filter call.")
+//         }).done(function(data){
+//             createCards(data, "specificcard");
+//         })
+// }
 
-function doroute(category){
-    $.ajax({
-        method: "GET",
-        data: {filter: category},
-        url: "/api/route-mastersheet",
-        dataType: "json",
-        }).fail(function(err){
-            console.error("Filter Route Sheet call failed.", err)
-        }).always(function(){
-            console.info("Processing filter route call.")
-        }).done(function(data){
-            createCards(data, "routecard");
-        })
-}
+// function doroute(category){
+//     $.ajax({
+//         method: "GET",
+//         data: {filter: category},
+//         url: "/api/route-mastersheet",
+//         dataType: "json",
+//         }).fail(function(err){
+//             console.error("Filter Route Sheet call failed.", err)
+//         }).always(function(){
+//             console.info("Processing filter route call.")
+//         }).done(function(data){
+//             createCards(data, "routecard");
+//         })
+// }
 
-function dofood(category){
-    $.ajax({
-        method: "GET",
-        data: {filter: category},
-        url: "/api/food-restsheet",
-        dataType: "json",
-        }).fail(function(err){
-            console.error("Filter food Sheet call failed.", err)
-        }).always(function(){
-            console.info("Processing food route call.")
-        }).done(function(data){
-            createCards(data, "foodcard");
-        })
-}
+// function dofood(category){
+//     $.ajax({
+//         method: "GET",
+//         data: {filter: category},
+//         url: "/api/food-restsheet",
+//         dataType: "json",
+//         }).fail(function(err){
+//             console.error("Filter food Sheet call failed.", err)
+//         }).always(function(){
+//             console.info("Processing food route call.")
+//         }).done(function(data){
+//             createCards(data, "foodcard");
+//         })
+// }
 
 function createCards( category, className ) {
-    zoneArray = [];
     for (var i = 0; i < category.length; i++) {
         var location = { name: category[i].name, placeId: category[i].placeId, zone: category[i].zone, logo: category[i].logo,
             location: { lat: category[i].latitude, lon: category[i].longitude } }
@@ -192,13 +193,7 @@ function createCards( category, className ) {
                                 </div>
                         </div>`;
 
-        if(className === "specificcard"){
-            addSingleClick(card, location);
-        } else {
-            // add click even thoruh function so you can add the location to the card
-            // meaning you create the element in here, and attach it to the jade file
-            addClickEvent(card, location);
-        }
+        addSingleClick(card, location);
         $(`.${className}`).append(card)
     }
 }
@@ -210,15 +205,13 @@ function addSingleClick(card, location){
 }
 
 function handleSingleLocation(el, location){
-    if(zoneArray.length === 0){
-        el.classList.add("selected-card");
-        zoneArray.push(location);
-        this.removeEventListener('click', el);
-        var urlString = location.placeId + "," + location.location.lat + "," + location.location.lon;
-        urlString.toString();
-        specificChoice(urlString);
-    }
+    el.classList.add("selected-card");
+    var dataString = location.placeId + "," + location.location.lat + "," + location.location.lon;
+    dataString.toString();
+    fetchQRCode(location.name, dataString);
 }
+
+// REWORK FOR MULTIPLE FUN CATEGORY
 
 function addClickEvent(card, location){
     // making it actually clickable
@@ -241,7 +234,7 @@ function handleMultiClick(el, location){
         el.classList.add("selected-card");
         zoneArray.push(location);
     }
-    counterButton();
+    // counterButton();
 }
 
 function checkDuplicate(location){
@@ -255,80 +248,39 @@ function checkDuplicate(location){
     return found;
 }
 
-function counterButton(){
-    var btn = document.querySelector('.submit-button');
-    var selectedAmount = zoneArray.length;
+// function counterButton(){
+//     var btn = document.querySelector('.submit-button');
+//     var selectedAmount = zoneArray.length;
 
-    if(zoneArray.length > 0){
-        btn.classList = "submit-button counting"
-        btn.textContent = `Submit ${selectedAmount}`
-    } else {
-        btn.classList = "submit-button inactive";
-        btn.textContent = "Submit"
-    }
-}
+//     if(zoneArray.length > 0){
+//         btn.classList = "submit-button counting"
+//         btn.textContent = `Submit ${selectedAmount}`
+//     } else {
+//         btn.classList = "submit-button inactive";
+//         btn.textContent = "Submit"
+//     }
+// }
 
-/** Zoning */
-
-function singleLocationQR(location){
-    if(location.split(',').length === 3){
-        $.ajax({
-            method: "GET",
-            data: {link: location},
-            url: "/api/single-qr",
-            dataType: "json",
-        }).fail(function(err){
-            console.error("Single QR generation call failed.", err)
-            var resp = err.responseText;
-            document.querySelector('.qr-code').src = resp;
-        }).always(function(){
-            console.info("Processing filter route call.")
-        }).done(function(data){
-            console.log("image:", data);
-            document.querySelector('.qr-code').src = data;
-        })
-    }
-}
-
-function submitZones(location){
-    if(zoneArray.length <= 1) return false;
-    var jsonString = JSON.stringify(zoneArray);
-    $.ajax({
-        method: "post",
-        data: jsonString,
-        url: "/api/qr-generator",
-        dataType: "json",
-        contentType: "application/json",
-    }).fail(function(err){
-        console.error("Filter Route Sheet call failed.", err)
-        var resp = err.responseText;
-        document.querySelector('.routeList-qr-code-popup-img').src = resp;
-    }).always(function(){
-        console.info("Processing filter route call.")
-    }).done(function(data){
-        console.log("image:", data);
-        document.querySelector('.routeList-qr-code-popup-img').src = data;
-    })
-}
-
-/** QR Code  */
-function generateQRCode(className, url){
-    $.ajax({
-        method: "GET",
-        data: {url: url},
-        url: "/api/create-qr",
-        dataType: "text",
-        }).fail(function(err){
-            console.error("Failed to create QR Code.", err)
-            var resp = err.responseText;
-            document.querySelector("." + className).src = resp;
-        }).always(function(){
-            console.info("Building QR Code.")
-        }).done(function(data){
-            console.log("data:", data);
-            document.querySelector("." + className).src = data;
-        })
-}
+// function multipleLocationQR(location){
+//     if(zoneArray.length <= 1) return false;
+//     var jsonString = JSON.stringify(zoneArray);
+//     $.ajax({
+//         method: "post",
+//         data: jsonString,
+//         url: "/api/qr-multiple",
+//         dataType: "json",
+//         contentType: "application/json",
+//     }).fail(function(err){
+//         console.error("Filter Route Sheet call failed.", err)
+//         var resp = err.responseText;
+//         document.querySelector('.routeList-qr-code-popup-img').src = resp;
+//     }).always(function(){
+//         console.info("Processing filter route call.")
+//     }).done(function(data){
+//         console.log("image:", data);
+//         document.querySelector('.routeList-qr-code-popup-img').src = data;
+//     })
+// }
 
 // ######### CORE APIs ###############################################
 
@@ -347,4 +299,45 @@ function displayLocations(data){
         console.log("display stores data:", data);
         createCards(data, className);
     })
+}
+
+/** QR Code  */
+
+function singleLocationQR(location){
+    if(location.split(',').length === 3){
+        $.ajax({
+            method: "GET",
+            data: {link: location},
+            url: "/api/qr-single",
+            dataType: "text",
+            contentType: "application/json"
+        }).fail(function(err){
+            console.error("Single QR generation call failed.", err)
+            var resp = err.responseText;
+            document.querySelector('.qr-code').src = resp;
+        }).always(function(){
+            console.info("Processing filter route call.")
+        }).done(function(data){
+            console.log("image:", data);
+            document.querySelector('.qr-code').src = data;
+        })
+    }
+}
+
+function generateQRCode(className, url){
+    $.ajax({
+        method: "GET",
+        data: {url: url},
+        url: "/api/qr-generic",
+        dataType: "text",
+        }).fail(function(err){
+            console.error("Failed to create QR Code.", err)
+            var resp = err.responseText;
+            document.querySelector("." + className).src = resp;
+        }).always(function(){
+            console.info("Building QR Code.")
+        }).done(function(data){
+            console.log("data:", data);
+            document.querySelector("." + className).src = data;
+        })
 }
