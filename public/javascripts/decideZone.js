@@ -1,64 +1,32 @@
 
-var zones = {
-    zone0:  { zone: '0', value: 0, letter: 'nah' },
-    zone1:  { zone: '1', value: 3.1, letter: 'a' },
-    zone2:  { zone: '2', value: 7.1, letter: 'b' },
-    zone3:  { zone: '3', value: 8.1, letter: 'c' },
-    zone4:  { zone: '4', value: 4.1, letter: 'd' },
-    zone5:  { zone: '5', value: 2.1, letter: 'e' },
-    zone6:  { zone: '6', value: 2.2, letter: 'f' },
-    zone7:  { zone: '7', value: 3.2, letter: 'j' },
-    zone8:  { zone: '8', value: 2.3, letter: 'k' },
-    zone9:  { zone: '9', value: 6.1, letter: 'l' },
-    zone10: { zone: '10', value: 10, letter: 'm' },
-    zone11: { zone: '11', value: 4.2, letter: 'n' },
-    zone12: { zone: '12', value: 15, letter: 'o' },
-    zone13: { zone: '13', value: 4.3, letter: 'p' },
-    zone14: { zone: '14', value: 6.2, letter: 'r' },
-    zone15: { zone: '15', value: 8.2, letter: 's' },
-    zone16: { zone: '16', value: 5, letter: 't' },
-    zone17: { zone: '17', value: 7.2, letter: 'u' },
-    zoneplaceholder18: { zone: 'none', value: 0, letter: 'z' }
-}
-
-var i = 0, t = 2, g = 0, f = 0, finalists = [];
+var i = 0, t = 2, g = 0, f = 0, finalists = [], zones, candidates;
 
 //Filter the paths
-var candidates = [
-{ zonedot: "abc", value1: zones.zone1.zone, value2: zones.zone2.zone, value3: zones.zone3.zone   },
-{ zonedot: "bst", value1: zones.zone2.zone, value2: zones.zone15.zone, value3: zones.zone16.zone   },
-{ zonedot: "stur", value1: zones.zone15.zone, value2: zones.zone16.zone, value3: zones.zone17.zone, zonedotValue4: zones.zone14.zone  },
-{ zonedot: "rpo", value1: zones.zone14.zone, value2: zones.zone13.zone, value3: zones.zone12.zone   },
-{ zonedot: "opn", value1: zones.zone12.zone, value2: zones.zone13.zone, value3: zones.zone11.zone   },
-{ zonedot: "umn", value1: zones.zone17.zone, value2: zones.zone10.zone, value3: zones.zone11.zone   },
-{ zonedot: "clm", value1: zones.zone3.zone, value2: zones.zone9.zone, value3: zones.zone10.zone   },
-{ zonedot: "lkj", value1: zones.zone9.zone, value2: zones.zone8.zone, value3: zones.zone7.zone   },
-{ zonedot: "kfe", value1: zones.zone8.zone, value2: zones.zone6.zone, value3: zones.zone5.zone   },
-{ zonedot: "adfe", value1: zones.zone1.zone, value2: zones.zone4.zone, value3: zones.zone6.zone, zonedotValue4: zones.zone5.zone  },
-];
 
-var
-    abc = [ zones.zone1.value, zones.zone2.value, zones.zone3.value, zones.zoneplaceholder18.value, zones.zone1.zone, zones.zone2.zone, zones.zone3.zone ],
 
-    bst = [ zones.zone2.value, zones.zone15.value, zones.zone16.value, zones.zoneplaceholder18.value, zones.zone2.zone, zones.zone15.zone, zones.zone16.zone ],
+// var
+//     abc = [ zones.zone1.value, zones.zone2.value, zones.zone3.value, zones.zoneplaceholder18.value, zones.zone1.zone, zones.zone2.zone, zones.zone3.zone ],
 
-    stur = [ zones.zone15.value, zones.zone16.value, zones.zone17.value, zones.zone14.value, zones.zone15.zone, zones.zone16.zone, zones.zone17.zone, zones.zone14.zone ],
+//     bst = [ zones.zone2.value, zones.zone15.value, zones.zone16.value, zones.zoneplaceholder18.value, zones.zone2.zone, zones.zone15.zone, zones.zone16.zone ],
 
-    rpo = [ zones.zone14.value, zones.zone13.value, zones.zone12.value, zones.zoneplaceholder18.value, zones.zone14.zone, zones.zone13.zone, zones.zone12.zone ],
+//     stur = [ zones.zone15.value, zones.zone16.value, zones.zone17.value, zones.zone14.value, zones.zone15.zone, zones.zone16.zone, zones.zone17.zone, zones.zone14.zone ],
 
-    opn = [ zones.zone12.value, zones.zone13.value, zones.zone11.value, zones.zoneplaceholder18.value, zones.zone12.zone, zones.zone13.zone, zones.zone11.zone ],
+//     rpo = [ zones.zone14.value, zones.zone13.value, zones.zone12.value, zones.zoneplaceholder18.value, zones.zone14.zone, zones.zone13.zone, zones.zone12.zone ],
 
-    umn = [ zones.zone17.value, zones.zone10.value, zones.zone11.value, zones.zoneplaceholder18.value, zones.zone17.zone, zones.zone10.zone, zones.zone11.zone ],
+//     opn = [ zones.zone12.value, zones.zone13.value, zones.zone11.value, zones.zoneplaceholder18.value, zones.zone12.zone, zones.zone13.zone, zones.zone11.zone ],
 
-    clm = [ zones.zone3.value, zones.zone9.value, zones.zone10.value, zones.zoneplaceholder18.value, zones.zone3.zone, zones.zone9.zone, zones.zone10.zone ],
+//     umn = [ zones.zone17.value, zones.zone10.value, zones.zone11.value, zones.zoneplaceholder18.value, zones.zone17.zone, zones.zone10.zone, zones.zone11.zone ],
 
-    lkj = [ zones.zone9.value, zones.zone8.value, zones.zone7.value, zones.zoneplaceholder18.value, zones.zone9.zone, zones.zone8.zone, zones.zone7.zone ],
+//     clm = [ zones.zone3.value, zones.zone9.value, zones.zone10.value, zones.zoneplaceholder18.value, zones.zone3.zone, zones.zone9.zone, zones.zone10.zone ],
 
-    kfe = [ zones.zone8.value, zones.zone6.value, zones.zone5.value, zones.zoneplaceholder18.value, zones.zone8.zone, zones.zone6.zone, zones.zone5.zone ],
+//     lkj = [ zones.zone9.value, zones.zone8.value, zones.zone7.value, zones.zoneplaceholder18.value, zones.zone9.zone, zones.zone8.zone, zones.zone7.zone ],
 
-    adfe = [ zones.zone1.value, zones.zone4.value, zones.zone6.value, zones.zone5.value, zones.zone1.zone, zones.zone4.zone, zones.zone6.zone, zones.zone5.zone ];
+//     kfe = [ zones.zone8.value, zones.zone6.value, zones.zone5.value, zones.zoneplaceholder18.value, zones.zone8.zone, zones.zone6.zone, zones.zone5.zone ],
+
+//     adfe = [ zones.zone1.value, zones.zone4.value, zones.zone6.value, zones.zone5.value, zones.zone1.zone, zones.zone4.zone, zones.zone6.zone, zones.zone5.zone ];
 
 function getHighestVal(valueArray){
+    console.log("valArr:", valueArray);
     var highestVal = 0, maxIndex = 0, arr = [];
     for( var i = 0; i < valueArray.length; i++ ) {
         if( valueArray[i] > highestVal && typeof valueArray[i] !== 'string' ) {
@@ -69,43 +37,65 @@ function getHighestVal(valueArray){
     return arr;
 };
 
-function getZone(value){
-    var zone = 0;
-    for( var i = 0; i < zoneArray.length; i++ ) {
-        if( zoneArray[i].value === highestVal ) {
-            zone = zoneArray[i].zone;
+function getZone(highestVal, zones){
+    var newZone = 0;
+    console.log(typeof(zones), zones);
+    Object.keys(zones).forEach(function(zone) {
+        if( zone.value === highestVal ) {
+            newZone = zones[zone].zone;
         }
-    }
-    return zone;
+    });
+    return newZone;
+    // for( var i = 0; i < zoneArray.length; i++ ) {
+    //     if( zoneArray[i].value === highestVal ) {
+    //         zone = zoneArray[i].zone;
+    //     }
+    // }
+    // return zone;
 }
 
-function getLetter(value){
+function getLetter(highestVal, zones){
     var letter = 0;
-    for( var i = 0; i < zoneArray.length; i++ ){
-        if( zoneArray[i].value === highestVal ){
-            letter = zoneArray[i].letter;
+    Object.keys(zones).forEach(function(zone){
+        if( zone.value === highestVal ){
+            letter = zones[zone].letter;
         }
-    }
+    })
+    // for( var i = 0; i < zoneArray.length; i++ ){
+    //     if( zoneArray[i].value === highestVal ){
+    //         letter = zoneArray[i].letter;
+    //     }
+    // }
     return letter;
 }
 
-function sortCandidates(arr){
+function sortCandidates(arr, zones){
     //this code sorts through the candidates looking for 'B' (value2)
-    return arr.filter(function(el){
-        return ((el.value1 === eval('zone'+t+'.zone') ||
-                el.value2 === eval('zone'+t+'.zone') ||
-                el.value3 === eval('zone'+t+'.zone') ||
-                el.zonedotValue4 === eval('zone'+t+'.zone')) &&
-                el.zonedot !== "abc");
-        }).map(function(el){
-            return el.zonedot;
-        }).sort();
+    // return arr.filter(function(el){
+    //     console.log("eval:", el.value1 === eval('zones.zone'+t+'.zone'));
+    //     return ((el.value1 === eval('zones.zone'+t+'.zone') ||
+    //             el.value2 === eval('zones.zone'+t+'.zone') ||
+    //             el.value3 === eval('zones.zone'+t+'.zone') ||
+    //             el.zonedotValue4 === eval('zones.zone'+t+'.zone')) &&
+    //             el.zonedot !== "abc");
+    //     }).map(function(el){
+    //         return el.zonedot;
+    //     }).sort();
+    return arr.map(function(el){
+        return el.zonedot;
+    }).sort();
 }
 
-function determineFinalists(){
-    while ( i < 20 ) {
+function determineFinalists(zones, candidates){
+    zones = zones;
+    candidates = candidates;
+    console.log("Zones: ", zones);
+    console.log("Candidates:", candidates);
+    for ( i = 0; i < 20; i++ ) {
 
-        var results = sortCandidates(candidates);
+        console.log("looper:", i);
+        var results = sortCandidates(candidates, zones);
+        console.log("upper results:", results);
         var part3 = results.toString();
         finalists.push(part3)
 
@@ -116,12 +106,13 @@ function determineFinalists(){
             }
         }
 
+        console.log("results:", results);
         // compares valueArray = results for the highest value and resturns it
-        var highestVal = getHighestVal( results[results.length-1] );
+        var highestVal = getHighestVal( results[results.length-1], zones );
 
         // return the correct zone
-        var zone = getZone( highestVal[0] );
-        var letter = getLetter( highestVal[0] );
+        var zone = getZone( highestVal[0], zones );
+        var letter = getLetter( highestVal[0], zones );
         finalists.push(letter);
 
         var t = zone;
@@ -130,17 +121,15 @@ function determineFinalists(){
         zones.zone1.value = 0;
         zones.zone2.value = 0;
         zones.zone3.value = 0;
-        eval('zone'+t).value = 0;
+        // if('zone'+t) eval('zone'+t).value = 0;
 
         if ( t == 7 || t == 4 ) {
             break;
         }
-
-        i++;
     }
+    console.log("decideZone:", finalists);
+    return finalists;
 }
-
-console.log(finalists);
 
 // var coordinates = [
 // { name: "a",      comparison: null,   theNumbers: ["6.89791,52.21983,0", "6.89786,52.21994,0", "6.8978,52.22005,0", "6.89773,52.22019,0", "6.89765,52.22031,0"] },
