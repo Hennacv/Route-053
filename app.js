@@ -224,6 +224,15 @@ router.route("/api/single-qr").get(function(req, res) {
   })
 })
 
+router.route("/api/create-qr").get(function(req, res) {
+  var url = req.query.url;
+
+  qrcode.toDataURL(url, function (err, link) {
+    res.set('Content-Type', 'image/png');
+    res.send(link)
+  })
+})
+
 router.route("/api/qr-generator").post(function(req, res) {
   var markers = req.body;
   var url = "https://lit-shelf-70756.herokuapp.com/qr/location/";
