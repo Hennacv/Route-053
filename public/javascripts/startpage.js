@@ -340,10 +340,6 @@ function submitZones(location){
 
 /** QR Code  */
 function generateQRCode(className, url){
-    var qr = createQR(url, qrcb);
-}
-
-function createQR(url){
     $.ajax({
         method: "GET",
         data: {url: url},
@@ -351,15 +347,12 @@ function createQR(url){
         dataType: "text",
         }).fail(function(err){
             console.error("Failed to create QR Code.", err)
-
+            var resp = err.responseText;
+            document.querySelector("." + className).src = resp;
         }).always(function(){
             console.info("Building QR Code.")
         }).done(function(data){
-            qrcb(data);
+            console.log("data:", data);
+            document.querySelector("." + className).src = data;
         })
-}
-
-function qrcb(data){
-    console.log('buffer:', data);
-    document.querySelector('.qr-code').src = data;
 }
