@@ -34,6 +34,8 @@ var muschRouter = require('./routes/musch');
 var musgalRouter = require('./routes/musgal');
 var chgalRouter = require('./routes/chgal');
 
+var listId = require('./routes/listId');
+
 
 var app = express();
 
@@ -82,6 +84,45 @@ app.get('/route/:category', function(req, res, next){
 app.get('/food/:category', function(req, res, next){
   res.render('foodChoice', { title: 'Route 053', category: req.params.category });
 });
+
+// ######## BIG CHANGES INCOMING
+app.get('/list/:sheetId/:listId', function(req, res, next){
+  res.render('listId', { title: 'Route 053', sheetId: req.params.sheetId, listId: req.params.listId });
+});
+
+router.route("/api/fetchList").get(function(req, res){
+  var data = req.query;
+  var locations = [];
+  db.ref(data.sheetId).once('value').then(function(snapshot){
+
+    var allItems = snapshot.val();
+
+    for(let i = 1; i < allItems.length; i++){
+      if(data.listId === allItems[i][2]){
+        var name = allItems[i][1];
+        var category = allItems[i][2];
+        var placeId = allItems[i][4];
+        var latitude = allItems[i][7];
+        var longitude = allItems[i][8];
+        var logo = (data.sheetId === "masterSheet") ? allItems[i][9] : false;
+
+        locations.push({
+          name: name,
+          placeId: placeId,
+          category: category,
+          latitude: latitude,
+          longitude: longitude,
+          logo: logo
+        });
+      }
+    }
+    console.log("locs:", locations);
+    res.send(locations);
+
+  })
+})
+
+// #######################################################################
 
 router.route("/api/mastersheet").get(function(req, res) {
   var locations = [];

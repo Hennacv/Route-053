@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    div(id="listId" class="makemegopoof") !{listId}
+    div(id="sheetId" class="makemegopoof") !{sheetId}
+    script.
+        window.onload = function(){
+            var listId = document.getElementById('listId').textContent;
+            var sheetId = document.getElementById('sheetId').textContent;
+            var data = { sheetId: sheetId, listId: listId, className: "cardsInList" }
+            //- console.log("list data:", data);
+            displayLocations(data);
+        }
+    div(class="bgImg")
+    .card-container.cardsInList
+    div(class="topbar")
+        p(class="route053") List of !{listName}
+        input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    // make a message, in the middle of the screen
+    // that says some shit like "Loading..."
+    // once you receive the data back from the API
+    // use jQuery to change the innerHTML or w/e
