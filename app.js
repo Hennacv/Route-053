@@ -102,22 +102,42 @@ router.route("/api/fetchList").get(function(req, res){
     var allItems = snapshot.val();
 
     for(let i = 1; i < allItems.length; i++){
-      if(data.listId === allItems[i][2]){
-        var name = allItems[i][1];
-        var category = allItems[i][2];
-        var placeId = allItems[i][4];
-        var latitude = allItems[i][7];
-        var longitude = allItems[i][8];
-        var logo = (data.sheetId === "masterSheet") ? allItems[i][9] : false;
+      if(data.listId !== "Restaurant") {
+        if(data.listId === allItems[i][2]){
+          var name = allItems[i][1];
+          var category = allItems[i][2];
+          var placeId = allItems[i][4];
+          var latitude = allItems[i][7];
+          var longitude = allItems[i][8];
+          var logo = (data.sheetId === "masterSheet") ? allItems[i][9] : false;
 
-        locations.push({
-          name: name,
-          placeId: placeId,
-          category: category,
-          latitude: latitude,
-          longitude: longitude,
-          logo: logo
-        });
+          locations.push({
+            name: name,
+            placeId: placeId,
+            category: category,
+            latitude: latitude,
+            longitude: longitude,
+            logo: logo
+          });
+        }
+      } else {
+        if(data.listId === "Restaurant" && (("Cafe" || "Terras") !== allItems[i][2])){
+          var name = allItems[i][1];
+          var category = allItems[i][2];
+          var placeId = allItems[i][4];
+          var latitude = allItems[i][7];
+          var longitude = allItems[i][8];
+          var logo = (data.sheetId === "masterSheet") ? allItems[i][9] : false;
+
+          locations.push({
+            name: name,
+            placeId: placeId,
+            category: category,
+            latitude: latitude,
+            longitude: longitude,
+            logo: logo
+          });
+        }
       }
     }
     res.send(locations);

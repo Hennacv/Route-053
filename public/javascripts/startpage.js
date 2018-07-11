@@ -1,6 +1,6 @@
 $(document).ready(displayPage);
 
-var list, zoneArray = [];
+var list, zoneArray = [], bothQRandMapCompleted = { map: false, qr: false };
 
 function displayPage(){
     var clicky = document.querySelector(".clickable");
@@ -192,10 +192,11 @@ function createCards( category, className ) {
                                     <h5>${location.name}</h5>
                                 </div>
                         </div>`;
-
+        console.log(`.${className} will be populated with ${location.name}`);
         addSingleClick(card, location);
         $(`.${className}`).append(card)
     }
+    $('.disappearingact').html("");
 }
 
 function addSingleClick(card, location){
@@ -293,6 +294,7 @@ function displayLocations(data){
         dataType: "json",
     }).fail(function(err){
         console.error("Filter food Sheet call failed.", err)
+        $('.disappearingact').html("");
     }).always(function(){
         console.info("Processing food route call.")
     }).done(function(data){
@@ -319,7 +321,9 @@ function singleLocationQR(location){
             console.info("Processing filter route call.")
         }).done(function(data){
             console.log("image:", data);
+            bothQRandMapCompleted.qr = true
             document.querySelector('.qr-code').src = data;
+            removeLoadingScreen();
         })
     }
 }
@@ -354,7 +358,14 @@ function createMap(name, dataString){
             lng: parseFloat(dataArr[2])
         }
     }
+    var response = initMap("qr-map", location)
+    bothQRandMapCompleted.map = true;
+    removeLoadingScreen();
+    console.log("map response:", response);
+}
 
-    console.log("location:", location);
-    initMap("qr-map", location)
+function removeLoadingScreen(){
+    if(bothQRandMapCompleted.qr && bothQRandMapCompleted.map){
+        $('.disappearingact2').html("");
+    }
 }

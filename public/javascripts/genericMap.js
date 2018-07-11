@@ -19,8 +19,6 @@ function initMap(id, destination) {
         travelMode: "WALKING"
     }
 
-    console.log("request:", request);
-
     directionsService.route(request, function(result, status){
         console.log(status, result);
         if(status == "OK"){
@@ -113,6 +111,8 @@ function initMap(id, destination) {
             });
         }
     });
+
+    return true;
     // FUCK EM --> USE DIRECTIONS API INSTEAD
     // var map;
     // var src = 'http://chananbos.com/pinkball/premadeRoutes/directionsPool1.kml';
