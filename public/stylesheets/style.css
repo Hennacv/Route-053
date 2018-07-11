@@ -283,7 +283,7 @@ p > span {
 /* route pages */
 
 /* ### TEMPORARY PLACEMENT */
-.qr-code {
+.qr-code, .qr-code-big {
   position: relative;
   z-index: 200;
   top: 100px;

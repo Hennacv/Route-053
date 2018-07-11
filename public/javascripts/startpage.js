@@ -1,11 +1,10 @@
-$(document).ready(displayPage);
+// $(document).ready(displayPage);
 
-var list, zoneArray = [], bothQRandMapCompleted = { map: false, qr: false };
+var list, selectedCultures = [], zoneArray = [], bothQRandMapCompleted = { map: false, qr: false };
 
-function displayPage(){
-    var clicky = document.querySelector(".clickable");
-    clicky.addEventListener("click", nextPage);
-}
+// function displayPage(){
+//     document.querySelector(".clickable").addEventListener("click", nextPage);
+// }
 
 function nextPage( e ){
     console.log("page clicked");
@@ -107,16 +106,17 @@ function fetchRestaurants(listId){
     if(listId) window.location.href = `/list/restSheet/${listId}`;
 }
 
-function fetchCulture(listId){
-    if(listId) window.location.href = `/list/cultureSheet/${listId}`;
-}
-
 function fetchStores(listId){
     if(listId) window.location.href = `/list/masterSheet/${listId}`;
 }
 
 function fetchQRCode(name, dataString){
     if(dataString) window.location.href = `/qr/${name}/${dataString}`;
+}
+
+function fetchCulture(cultures){
+    var listOfCultures = cultures.toString().replace(/,/g, "+");
+    if(listOfCultures) window.location.href = `/qr-multi/${listOfCultures}`;
 }
 
 // ######################################################################
@@ -215,38 +215,22 @@ function handleSingleLocation(el, location){
 // REWORK FOR MULTIPLE FUN CATEGORY
 
 function addClickEvent(card, location){
-    // making it actually clickable
     card.addEventListener('click', function(){
         handleMultiClick(this, location);
     })
 }
 
-function handleMultiClick(el, location){
-    // copy checkDuplicate() function also
-    // this section decides whether to select, or unselect something
-    // IMPORTANT: zoneArray is a global array that keeps track of what's selected
-    // you'll need to make another one for that section
-    if(checkDuplicate(location)){
+function handleMultiClick(el, placeId){
+    if(checkDuplicate(placeId)){
         el.classList.remove("selected-card");
-        zoneArray = zoneArray.filter(function(el){
+        selectedCultures = selectedCultures.filter(function(el){
             return el.placeId !== location.placeId
         })
     } else {
         el.classList.add("selected-card");
-        zoneArray.push(location);
+        selectedCultures.push(location);
     }
     // counterButton();
-}
-
-function checkDuplicate(location){
-    var found = false;
-    for(var i = 0; i < zoneArray.length; i++) {
-        if (zoneArray[i].placeId === location.placeId) {
-            found = true;
-            break;
-        }
-    }
-    return found;
 }
 
 // function counterButton(){
@@ -303,7 +287,25 @@ function displayLocations(data){
     })
 }
 
-/** QR Code  */
+function fetchMultipleLocations(dataString){
+    $.ajax({
+        method: "GET",
+        data: dataString,
+        url: "/api/fetchMultipleLocations",
+        contentType: "plain/text",
+        dataType: "json",
+    }).fail(function(err){
+        console.error("Filter food Sheet call failed.", err)
+        $('.disappearingact3').html("");
+    }).always(function(){
+        console.info("Processing food route call.")
+    }).done(function(data){
+        console.log("display stores data:", data);
+        if(data.length > 0) handleMultipleLocationsData(data);
+    })
+}
+
+// ######## QR Code  #############################################
 
 function singleLocationQR(location){
     if(location.split(',').length === 3){
@@ -323,7 +325,7 @@ function singleLocationQR(location){
             console.log("image:", data);
             bothQRandMapCompleted.qr = true
             document.querySelector('.qr-code').src = data;
-            removeLoadingScreen();
+            removeLoadingScreen('.disappearingact2');
         })
     }
 }
@@ -346,6 +348,25 @@ function generateQRCode(className, url){
         })
 }
 
+function multipleLocationsQR(url){
+    $.ajax({
+        method: "GET",
+        data: url,
+        url: "/api/qr-multiple",
+        dataType: "text",
+        contentType: "text/plain"
+        }).fail(function(err){
+            console.error("Failed to create QR Code.", err)
+        }).always(function(){
+            console.info("Building QR Code.")
+        }).done(function(data){
+            console.log("qr data:", data);
+            document.querySelector(".qr-code-big").src = data;
+            bothQRandMapCompleted.qr = true;
+            removeLoadingScreen('.disappearingact3');
+        })
+}
+
 // ######## GOOGLE MAPS API ####################
 
 function createMap(name, dataString){
@@ -360,12 +381,54 @@ function createMap(name, dataString){
     }
     var response = initMap("qr-map", location)
     bothQRandMapCompleted.map = true;
-    removeLoadingScreen();
+    removeLoadingScreen('.disappearingact2');
     console.log("map response:", response);
 }
 
-function removeLoadingScreen(){
+
+// ####### UTILITIES #################################
+function removeLoadingScreen(className){
     if(bothQRandMapCompleted.qr && bothQRandMapCompleted.map){
-        $('.disappearingact2').html("");
+        $(className).html("");
     }
+}
+
+function selectedCulture(el, listId){
+    if(checkDuplicate(selectedCultures, listId)){
+        el.classList.remove("selected-card");
+        selectedCultures = selectedCultures.filter(function(item){
+            return item !== listId
+        })
+    } else {
+        el.classList.add("selected-card");
+        selectedCultures.push(listId);
+    }
+}
+
+function checkDuplicate(arr, location){
+    var found = false;
+    for(var i = 0; i < arr.length; i++) {
+        if (arr[i] === location) {
+            found = true;
+            break;
+        }
+    }
+    return found;
+}
+
+function handleMultipleLocationsData(data){
+    var waypoints = [];
+    var markers = [];
+    var qrString = "";
+
+    for(let i = 0; i < data.length; i++){
+        waypoints.push({ location: { lat: data[i].latitude, lng: data[i].longitude }, stopover: true })
+        markers.push(data[i].placeId)
+        qrString += `@${data[i].placeId},${data[i].latitude},${data[i].longitude}`
+    }
+    multipleLocationsQR(qrString);
+    var response = createWayPointsMap("qr-map-waypoints", waypoints, markers);
+    bothQRandMapCompleted.map = response;
+    removeLoadingScreen('.disappearingact3');
+
 }
