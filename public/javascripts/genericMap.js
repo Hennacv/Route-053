@@ -20,9 +20,10 @@ function initMap(id, destination) {
     }
 
     directionsService.route(request, function(result, status){
-        console.log(status, result);
         if(status == "OK"){
             directionsDisplay.setDirections(result);
+        } else {
+            console.error("WAYPOINTS MAP ERROR:", result, status)
         }
     })
 
@@ -145,9 +146,10 @@ function createWayPointsMap(id, waypoints, markers) {
     }
 
     directionsService.route(request, function(result, status){
-        console.log(result, status);
         if(status == "OK"){
             directionsDisplay.setDirections(result);
+        } else {
+            console.error("WAYPOINTS MAP ERROR:", result, status)
         }
     })
 
@@ -164,7 +166,6 @@ function createWayPointsMap(id, waypoints, markers) {
                     position: place.geometry.location,
                     // icon: iconBase + 'icon-poolen.png'
                 });
-                //Making Marker Clickable
                 google.maps.event.addListener(marker, 'click', function() {
                     if(place.opening_hours){
                         infowindow.setContent(
@@ -206,48 +207,6 @@ function createWayPointsMap(id, waypoints, markers) {
             }
         });
     }
-
-    // // Second Marker
-    // service.getDetails({
-    //     placeId: laLigna
-    // }, function(place, status) {
-    //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-    //         var iconBase = 'http://chananbos.com/pinkball/icons/';
-    //         var marker = new google.maps.Marker({
-    //             map: map,
-    //             position: place.geometry.location,
-    //             //  icon: iconBase + 'poolmarker.png'
-    //         });
-
-    //         google.maps.event.addListener(marker, 'click', function() {
-    //             infowindow.setContent(
-    //                 '<div><strong>' + place.name + '</strong><br>' +
-    //                 '<br>'
-    //                 + '<b>Adress:</b>'
-    //                 + '<br>'
-    //                 + place.formatted_address
-    //                 + '</div>'
-    //                 + '<br>'
-    //                 + '<b>Opening Times:</b>'
-    //                 + '<br>'
-    //                 + place.opening_hours.weekday_text[0]
-    //                 + '<br>'
-    //                 + place.opening_hours.weekday_text[1]
-    //                 + '<br>'
-    //                 + place.opening_hours.weekday_text[2]
-    //                 + '<br>'
-    //                 + place.opening_hours.weekday_text[3]
-    //                 + '<br>'
-    //                 + place.opening_hours.weekday_text[4]
-    //                 + '<br>'
-    //                 + place.opening_hours.weekday_text[5]
-    //                 + '<br>'
-    //                 + place.opening_hours.weekday_text[6]
-    //             );
-    //             infowindow.open(map, this);
-    //         });
-    //     }
-    // });
 
     return true;
 }

@@ -1,13 +1,6 @@
-// $(document).ready(displayPage);
-
 var list, selectedCultures = [], zoneArray = [], bothQRandMapCompleted = { map: false, qr: false };
 
-// function displayPage(){
-//     document.querySelector(".clickable").addEventListener("click", nextPage);
-// }
-
 function nextPage( e ){
-    console.log("page clicked");
     window.location.href = "./firstCh";
 }
 
@@ -16,84 +9,47 @@ function goBack( e ){
 }
 
 function doFun(){
-    console.log("clicked");
     window.location.href = "./fun";
 }
 
 function funActivities(){
-    console.log("clicked");
     window.location.href = "./funactivities";
 }
 
 function culture(){
-    console.log("clicked");
     window.location.href = "./culture";
 }
 
 function pool(){
-    console.log("clicked");
     window.location.href = "./pool";
 }
 
-function pool1(){
-    console.log("clicked");
-    window.location.href = "./pool1";
-}
-
-function pool2(){
-    console.log("clicked");
-    window.location.href = "./pool2";
-}
-
-function film(){
-    console.log("clicked");
-    window.location.href = "./film";
-}
-
-function escapeRoom(){
-    console.log("clicked");
-    window.location.href = "./eroom";
-}
-
 function goShopping(){
-    console.log("clicked");
-    window.location.href = "./shop";
+    window.location.href = "./specific";
 }
 
 function eatFood(){
-    console.log("clicked");
     window.location.href = "./food";
 }
 
 function somethingSpecific(locations){
-    console.log("clicked");
     window.location.href = "./specific";
-    // retrieveStores();
 }
 
 function goToRoute(){
-    console.log("clicked");
     window.location.href = "./route";
 }
 
 function allStores(){
-    console.log("clicked");
     window.location.href = "./allstores";
-}
-
-function determineSpecificRoute(category){
-    if(category) window.location.href = `/specific/${category}`;
-    console.log("finding cat:", category);
 }
 
 function determineMultipleRoute(category){
     if(category) window.location.href = `/route/${category}`;
-    console.log("finding cat2:", category);
 }
 
 function determineFood(category){
     if(category) window.location.href = `/food/${category}`;
-    console.log("finding food:", category);
 }
 
 function specificChoice(location){
@@ -119,66 +75,7 @@ function fetchCulture(cultures){
     if(listOfCultures) window.location.href = `/qr-multi/${listOfCultures}`;
 }
 
-// ######################################################################
-
-// function retrieveStores(){
-//     $.ajax({
-//         method: "GET",
-//         url: "/api/mastersheet",
-//         dataType: "json",
-//     }).fail(function(err){
-//         console.error("Mastersheet call failed.", err)
-//     }).always(function(){
-//         console.info("Processing mastersheet call.")
-//     }).done(function(data){
-//         createButtons(data);
-//     })
-// }
-
-// function dospecific(category){
-//     $.ajax({
-//         method: "GET",
-//         data: {filter: category},
-//         url: "/api/specific-mastersheet",
-//         dataType: "json",
-//         }).fail(function(err){
-//             console.error("Filter Sheet call failed.", err)
-//         }).always(function(){
-//             console.info("Processing filter call.")
-//         }).done(function(data){
-//             createCards(data, "specificcard");
-//         })
-// }
-
-// function doroute(category){
-//     $.ajax({
-//         method: "GET",
-//         data: {filter: category},
-//         url: "/api/route-mastersheet",
-//         dataType: "json",
-//         }).fail(function(err){
-//             console.error("Filter Route Sheet call failed.", err)
-//         }).always(function(){
-//             console.info("Processing filter route call.")
-//         }).done(function(data){
-//             createCards(data, "routecard");
-//         })
-// }
-
-// function dofood(category){
-//     $.ajax({
-//         method: "GET",
-//         data: {filter: category},
-//         url: "/api/food-restsheet",
-//         dataType: "json",
-//         }).fail(function(err){
-//             console.error("Filter food Sheet call failed.", err)
-//         }).always(function(){
-//             console.info("Processing food route call.")
-//         }).done(function(data){
-//             createCards(data, "foodcard");
-//         })
-// }
+// ###### Cards ###########################################################
 
 function createCards( category, className ) {
     for (var i = 0; i < category.length; i++) {
@@ -192,7 +89,6 @@ function createCards( category, className ) {
                                     <h5>${location.name}</h5>
                                 </div>
                         </div>`;
-        console.log(`.${className} will be populated with ${location.name}`);
         addSingleClick(card, location);
         $(`.${className}`).append(card)
     }
@@ -212,61 +108,6 @@ function handleSingleLocation(el, location){
     fetchQRCode(location.name, dataString);
 }
 
-// REWORK FOR MULTIPLE FUN CATEGORY
-
-function addClickEvent(card, location){
-    card.addEventListener('click', function(){
-        handleMultiClick(this, location);
-    })
-}
-
-function handleMultiClick(el, placeId){
-    if(checkDuplicate(placeId)){
-        el.classList.remove("selected-card");
-        selectedCultures = selectedCultures.filter(function(el){
-            return el.placeId !== location.placeId
-        })
-    } else {
-        el.classList.add("selected-card");
-        selectedCultures.push(location);
-    }
-    // counterButton();
-}
-
-// function counterButton(){
-//     var btn = document.querySelector('.submit-button');
-//     var selectedAmount = zoneArray.length;
-
-//     if(zoneArray.length > 0){
-//         btn.classList = "submit-button counting"
-//         btn.textContent = `Submit ${selectedAmount}`
-//     } else {
-//         btn.classList = "submit-button inactive";
-//         btn.textContent = "Submit"
-//     }
-// }
-
-// function multipleLocationQR(location){
-//     if(zoneArray.length <= 1) return false;
-//     var jsonString = JSON.stringify(zoneArray);
-//     $.ajax({
-//         method: "post",
-//         data: jsonString,
-//         url: "/api/qr-multiple",
-//         dataType: "json",
-//         contentType: "application/json",
-//     }).fail(function(err){
-//         console.error("Filter Route Sheet call failed.", err)
-//         var resp = err.responseText;
-//         document.querySelector('.routeList-qr-code-popup-img').src = resp;
-//     }).always(function(){
-//         console.info("Processing filter route call.")
-//     }).done(function(data){
-//         console.log("image:", data);
-//         document.querySelector('.routeList-qr-code-popup-img').src = data;
-//     })
-// }
-
 // ######### CORE APIs ###############################################
 
 function displayLocations(data){
@@ -277,12 +118,11 @@ function displayLocations(data){
         url: "/api/fetchList",
         dataType: "json",
     }).fail(function(err){
-        console.error("Filter food Sheet call failed.", err)
+        console.error("Displaying Locations failed.", err)
         $('.disappearingact').html("");
     }).always(function(){
-        console.info("Processing food route call.")
+        console.info("Attempting to display locations.")
     }).done(function(data){
-        console.log("display stores data:", data);
         createCards(data, className);
     })
 }
@@ -295,12 +135,11 @@ function fetchMultipleLocations(dataString){
         contentType: "plain/text",
         dataType: "json",
     }).fail(function(err){
-        console.error("Filter food Sheet call failed.", err)
+        console.error("Multiple locations fetch failed.", err)
         $('.disappearingact3').html("");
     }).always(function(){
-        console.info("Processing food route call.")
+        console.info("Attempting to fetch multiple locations.")
     }).done(function(data){
-        console.log("display stores data:", data);
         if(data.length > 0) handleMultipleLocationsData(data);
     })
 }
@@ -320,9 +159,8 @@ function singleLocationQR(location){
             var resp = err.responseText;
             document.querySelector('.qr-code').src = resp;
         }).always(function(){
-            console.info("Processing filter route call.")
+            console.info("Creating single QR code.")
         }).done(function(data){
-            console.log("image:", data);
             bothQRandMapCompleted.qr = true
             document.querySelector('.qr-code').src = data;
             removeLoadingScreen('.disappearingact2');
@@ -337,13 +175,12 @@ function generateQRCode(className, url){
         url: "/api/qr-generic",
         dataType: "text",
         }).fail(function(err){
-            console.error("Failed to create QR Code.", err)
+            console.error("Failed to create generic QR Code.", err)
             var resp = err.responseText;
             document.querySelector("." + className).src = resp;
         }).always(function(){
-            console.info("Building QR Code.")
+            console.info("Creating generic QR code.")
         }).done(function(data){
-            console.log("data:", data);
             document.querySelector("." + className).src = data;
         })
 }
@@ -356,11 +193,10 @@ function multipleLocationsQR(url){
         dataType: "text",
         contentType: "text/plain"
         }).fail(function(err){
-            console.error("Failed to create QR Code.", err)
+            console.error("Failed to create QR code of multiple locations.", err)
         }).always(function(){
-            console.info("Building QR Code.")
+            console.info("Creating multi QR code.")
         }).done(function(data){
-            console.log("qr data:", data);
             document.querySelector(".qr-code-big").src = data;
             bothQRandMapCompleted.qr = true;
             removeLoadingScreen('.disappearingact3');
@@ -382,7 +218,6 @@ function createMap(name, dataString){
     var response = initMap("qr-map", location)
     bothQRandMapCompleted.map = true;
     removeLoadingScreen('.disappearingact2');
-    console.log("map response:", response);
 }
 
 

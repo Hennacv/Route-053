@@ -87,7 +87,7 @@ app.get('/food/:category', function(req, res, next){
   res.render('foodChoice', { title: 'Route 053', category: req.params.category });
 });
 
-// ######## BIG CHANGES INCOMING
+// critical paths, touching these will result in the entire app not working
 app.get('/list/:sheetId/:listId', function(req, res, next){
   res.render('listId', { title: 'Route 053 | Listing Locations', sheetId: req.params.sheetId, listId: req.params.listId });
 });
@@ -98,6 +98,7 @@ app.get('/qr-multi/:types', function(req, res, next){
   res.render('multipleLocations', { title: 'Route 053 | Finding Path', types: req.params.types });
 });
 
+// this is the MAIN call for all the locations, except for culture
 router.route("/api/fetchList").get(function(req, res){
   var data = req.query;
   var locations = [];
@@ -148,6 +149,7 @@ router.route("/api/fetchList").get(function(req, res){
   })
 })
 
+// this is the API call for cultures only
 router.route("/api/fetchMultipleLocations").get(function(req, res){
   var data = req.query
   data = Object.keys(data)[0].split(' ')
@@ -174,141 +176,11 @@ router.route("/api/fetchMultipleLocations").get(function(req, res){
           });
         }
     }
-    console.log("loc:", locations);
     res.send(locations);
   })
 })
 
-// #######################################################################
-
-// router.route("/api/mastersheet").get(function(req, res) {
-//   var locations = [];
-
-//   db.ref("masterSheet").once('value').then(function(snapshot){
-
-//     var allItems = snapshot.val();
-//     for(let i = 1; i < allItems.length; i++){
-//         var name = allItems[i][1];
-//         var category = allItems[i][2];
-//         var subcategory = allItems[i][3];
-//         var placeId = allItems[i][4];
-//         var zone = allItems[i][6];
-//         var latitude = allItems[i][7];
-//         var longitude = allItems[i][8];
-//         var logo = allItems[i][9];
-
-//         locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude, logo: logo });
-//     }
-//     res.send(locations);
-//     })
-// })
-
-// router.route("/api/specific-mastersheet").get(function(req, res) {
-//   var filter = req.query.filter;
-//   var locations = [];
-
-//   db.ref("masterSheet").once('value').then(function(snapshot){
-
-//     var allItems = snapshot.val();
-//     for(let i = 1; i < allItems.length; i++){
-//       if(filter === allItems[i][2]){
-//         var name = allItems[i][1];
-//         var category = allItems[i][2];
-//         var subcategory = allItems[i][3];
-//         var placeId = allItems[i][4];
-//         var zone = allItems[i][6];
-//         var latitude = allItems[i][7];
-//         var longitude = allItems[i][8];
-//         var logo = allItems[i][9];
-
-//         locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude, logo: logo });
-//       }
-//     }
-//     res.send(locations);
-//     })
-// })
-
-// router.route("/api/route-mastersheet").get(function(req, res) {
-//   var filter = req.query.filter;
-//   var locations = [];
-
-//   db.ref("masterSheet").once('value').then(function(snapshot){
-
-//     var allItems = snapshot.val();
-//     for(let i = 1; i < allItems.length; i++){
-//       console.log("items:", allItems[i]);
-//       if(filter === allItems[i][2]){
-//         var name = allItems[i][1];
-//         var category = allItems[i][2];
-//         var subcategory = allItems[i][3];
-//         var placeId = allItems[i][4];
-//         var zone = allItems[i][6];
-//         var latitude = allItems[i][7];
-//         var longitude = allItems[i][8];
-//         var logo = allItems[i][9];
-
-//         locations.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, zone: zone, latitude: latitude, longitude: longitude, logo: logo });
-//       }
-//     }
-//     res.send(locations);
-//     })
-// })
-
-// router.route("/api/restsheet").get(function(req, res) {
-//   var restaurants = [];
-
-//   db.ref("restSheet").once('value').then(function(snapshot){
-
-//     var allItems = snapshot.val();
-//     for(let i = 1; i < allItems.length; i++){
-//         var name = allItems[i][0];
-//         var category = allItems[i][2];
-//         var subcategory = allItems[i][4];
-//         var placeId = allItems[i][1];
-//         var price = allItems[i][3];
-//         var latitude = allItems[i][5];
-//         var longitude = allItems[i][6];
-
-//         restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
-//     }
-//     res.send(restaurants);
-//     })
-// })
-
-// router.route("/api/food-restsheet").get(function(req, res) {
-//   var filter = req.query.filter;
-//   var restaurants = [];
-
-//   db.ref("restSheet").once('value').then(function(snapshot){
-
-//     var allItems = snapshot.val();
-//     for(let i = 1; i < allItems.length; i++){
-//         if(filter === 'Restaurant' && (("Cafe" || "Terras") !== allItems[i][2])) {
-//           var name = allItems[i][0];
-//           var category = allItems[i][2];
-//           var subcategory = allItems[i][4];
-//           var placeId = allItems[i][1];
-//           var price = allItems[i][3];
-//           var latitude = allItems[i][5];
-//           var longitude = allItems[i][6];
-
-//           restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
-//         }
-//         if(filter === allItems[i][2]){
-//           var name = allItems[i][0];
-//           var category = allItems[i][2];
-//           var subcategory = allItems[i][4];
-//           var placeId = allItems[i][1];
-//           var price = allItems[i][3];
-//           var latitude = allItems[i][5];
-//           var longitude = allItems[i][6];
-
-//           restaurants.push({ name: name, placeId: placeId, category: category, subcategory: subcategory, price: price, latitude: latitude, longitude: longitude });
-//         }
-//     }
-//     res.send(restaurants);
-//     })
-// })
+// ############ QR Codes #######################################
 
 router.route("/api/qr-single").get(function(req, res) {
   var url = "http://www.route053.com/qr/location/";
