@@ -9,19 +9,19 @@ block content
     .card-deck-wrapper
         .card-deck
             // Card 1
-            .card.text-center(onclick="determineFood('Terras', false)")
+            .card.text-center(onclick="fetchRestaurants('Terras')")
                 img.card-img-top.img-padding(src='/images/terras.png', alt='Terras')
                 .card-body
                     h5 Terras
                     //- p.card-text Alles van poolen tot musea en veel meer
             // Card 2
-            .card.text-center(onclick="determineFood('Cafe', false)")
+            .card.text-center(onclick="fetchRestaurants('Cafe')")
                 img.card-img-top.img-padding(src='/images/cafe.png', alt='Cafe')
                 .card-body
                     h5 Cafe
                     //- p.card-text Jij kiest de winkels en wij maken de route
             // Card 3
-            .card.text-center(onclick="determineFood('Restaurant', true)")
+            .card.text-center(onclick="fetchRestaurants('Restaurant')")
                 img.card-img-top.img-padding(src='/images/restaurant.png', alt='Restaurant')
                 .card-body
                     h5 Restaurant

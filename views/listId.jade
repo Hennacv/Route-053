@@ -8,13 +8,15 @@ block content
             var listId = document.getElementById('listId').textContent;
             var sheetId = document.getElementById('sheetId').textContent;
             var data = { sheetId: sheetId, listId: listId, className: "cardsInList" }
-            //- console.log("list data:", data);
             displayLocations(data);
         }
+    div(class="disappearingact")
+        div(class="loading-screen isLoading")
+            p Een moment geduld aub...
     div(class="bgImg")
     .card-container.cardsInList
     div(class="topbar")
-        p(class="route053") List of !{listName}
+        p(class="route053") Lijst voor !{listId ? listId : "Items"}
         input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
     // make a message, in the middle of the screen
     // that says some shit like "Loading..."

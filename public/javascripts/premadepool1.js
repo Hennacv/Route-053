@@ -1,5 +1,6 @@
 // General Map Setup
 function initMap() {
+  // REQUIRE CLASSNAME/ID
     var map = new google.maps.Map(document.getElementById('bridge'), {
         center: {lat: 52.219841, lng: 6.896377},
         zoom: 16.6
@@ -10,6 +11,7 @@ function initMap() {
 
 //First Marker
     service.getDetails({
+      // REQUIRES PLACEID
     placeId: 'ChIJHdpjg3MUuEcRU7vwSFdUl-E'
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -95,6 +97,7 @@ function initMap() {
         });
 
     var map;
+    // FUCK EM --> USE DIRECTIONS API INSTEAD
 	var src = 'http://chananbos.com/pinkball/premadeRoutes/directionsPool1.kml';
 
 	var kmlLayer = new google.maps.KmlLayer(src, {

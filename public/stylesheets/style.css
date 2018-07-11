@@ -92,7 +92,7 @@ p > span {
 
 .route053 {
   font-family: Paragon;
-  font-size: 60px;
+  font-size: 28px;
   color: white;
   position: fixed;
   transform: translate(-50%, -50%);
@@ -283,12 +283,13 @@ p > span {
 /* route pages */
 
 /* ### TEMPORARY PLACEMENT */
-.qr-code {
+.qr-code, .qr-code-big {
   position: relative;
   z-index: 200;
-  left: 630px;
+  top: 100px;
+  /* left: 630px;
   top: -390px;
-  min-width: 320px;
+  min-width: 320px; */
 }
 
 .route-wrapper {
@@ -340,4 +341,29 @@ p > span {
   position: absolute;
   font-family: Roboto;
   bottom: -5px;
+}
+
+.loading-screen {
+  position: static;
+  opacity: 0;
+  min-width: 100vw;
+  min-height: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -200px;
+  z-index: 999;
+  background-color: rgba(0,0,0,0.6)
+}
+
+.loading-screen > p {
+  font-size: 60px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px #241d13;
+}
+
+.isLoading {
+  position: relative;
+  opacity: 1;
 }

@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    //- div(id="name" class="makemegopoof") !{name}
+    div(id="types" class="makemegopoof") !{types}
+    script.
+        window.onload = function(){
+            //- var name = document.getElementById('name').textContent;
+            var types = document.getElementById('types').textContent;
+            fetchMultipleLocations(types)
+            //- var data = { name: name, dataString: dataString }
+            //- multipleLocationsQR(dataString);
+            //- createWayPointMap(name, dataString);
+        }
+    div(class="disappearingact3")
+        div(class="loading-screen isLoading")
+            p Een moment geduld aub...
+    div(class="bgImg")
+    div(class="topbar")
+        p(class="route053") Route Gemaakt
+        input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
+    div(class="route-wrapper")
+        div.map(id="qr-map-waypoints")
+        div(class="route-information")
+            img(class="qr-code-big")
+            div(class="textundercode")
+                p(class="qrtext") 1. Scan de #[span QR Code] #[br]
+                p(class="qrtext") 2. Scan de #[span QR Code] #[br]
+                p(class="qrtext") 3. #[span Veel plezier] met uw route

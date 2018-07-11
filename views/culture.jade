@@ -7,30 +7,17 @@ block content
             input(type="image" src="/images/back.png" class="backbutton" alt="Back button" onclick="goBack()")
     .card-deck-wrapper
         .card-deck
-            // Card 1
-            .card.text-center
+            div(class="card text-center" onclick="selectedCulture(this, 'Museum')")
                 img.card-img-top.img-padding(src='/images/museum.png', alt='Museum')
                 .card-body
-                    .form-check
-                        input#checkbox101.form-check-input.checky(type='checkbox')
-                        label.form-check-label(for='checkbox101') Musea
-                        //div inside label
-                    //- p.card-text Alles van poolen tot musea en veel meer
-            // Card 2
-            .card.text-center
+                    h5 Musea
+            div(class="card text-center" onclick="selectedCulture(this, 'Kerk')")
                 img.card-img-top.img-padding(src='/images/church.png', alt='Kerk')
                 .card-body
-                    .form-check
-                        input#checkbox102.form-check-input.checky(type='checkbox')
-                        label.form-check-label(for='checkbox102') Kerken
-                    //- p.card-text Jij kiest de winkels en wij maken de route
-            // Card 3
-            .card.text-center
+                    h5 Kerken
+            div(class="card text-center" onclick="selectedCulture(this, 'Gallery')")
                 img.card-img-top.img-padding(src='/images/gallery.png', alt='Gallery')
                 .card-body
-                    .form-check
-                        input#checkbox103.form-check-input.checky(type='checkbox')
-                        label.form-check-label(for='checkbox103') Gallerijen
-                    //- p.card-text Restaurants, Cafes, Terrasjes, Bars
-    button#submit-options Submit        
+                    h5 Gallerijen
+    button(id="submit-options" onclick="fetchCulture(selectedCultures)") Submit
 

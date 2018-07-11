@@ -1,8 +1,8 @@
 $(document).ready(loadPage);
 
-function loadPage(){
-  $("#submit-options").click(submitter);
-}
+// function loadPage(){
+//   $("#submit-options").click(submitter);
+// }
 
 // $("#submit-options").on('click', submitter)
 
