@@ -114,7 +114,7 @@ router.route("/api/fetchList").get(function(req, res){
           var placeId = allItems[i][4];
           var latitude = allItems[i][7];
           var longitude = allItems[i][8];
-          var logo = (data.sheetId === "masterSheet") ? allItems[i][9] : false;
+          var logo = allItems[i][9];
 
           locations.push({
             name: name,
@@ -132,7 +132,7 @@ router.route("/api/fetchList").get(function(req, res){
           var placeId = allItems[i][4];
           var latitude = allItems[i][7];
           var longitude = allItems[i][8];
-          var logo = (data.sheetId === "masterSheet") ? allItems[i][9] : false;
+          var logo = allItems[i][9];
 
           locations.push({
             name: name,
@@ -164,7 +164,7 @@ router.route("/api/fetchMultipleLocations").get(function(req, res){
           var placeId = allItems[i][4];
           var latitude = allItems[i][7];
           var longitude = allItems[i][8];
-          var logo = (data.sheetId === "masterSheet") ? allItems[i][9] : false;
+          var logo = allItems[i][9];
 
           locations.push({
             name: name,
